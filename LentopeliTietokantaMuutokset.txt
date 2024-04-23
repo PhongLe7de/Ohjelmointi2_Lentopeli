@@ -1,0 +1,113 @@
+#effect=1 -> Anna toiselle vuoron menetys SABOTAASI
+#effect=2 -> Pelaaja menettää vuoron HUONOA TUURIA
+#effect=3 -> Pelaaja siirtyy kolme askelta taaksepäin HUONOA TUURIA
+#effect=4 -> Siirryt kolme askelta eteenpäin ONNENPEKKA
+
+
+#Luo uuden pöydän, missä pelaaja-nimi, pisteet ja vuoron skippaukset
+CREATE TABLE game_player (
+    ID int NOT NULL AUTO_INCREMENT,
+    player_name varchar(255),
+    score int DEFAULT 0,
+    effect_skip_turns int DEFAULT 0,
+    victory bool DEFAULT 0,
+    PRIMARY KEY (ID),
+    UNIQUE (player_name)
+);
+
+#Luo uuden pöydän, jossa yllätys- ja co-kortit
+CREATE TABLE cards (
+    ID int NOT NULL AUTO_INCREMENT,
+    type varchar(255),
+    flavour_text varchar(2000),
+    effect int DEFAULT 0,
+    score int DEFAULT 0,
+    PRIMARY KEY (ID),
+    UNIQUE (flavour_text)
+);
+
+
+#Sabotaasi-kortit
+INSERT INTO cards (type, flavour_text, effect, score)
+VALUES ('Sabotaasi', 'Avioehto kannatti: Hyviä uutisia! Asianajajasi oli sinuun yhteydessä ilmoittaakseen, 
+että avioero puolisostasi on nyt virallista. Saat erossa huomattavan omaisuuden ja 
+kappas! Yksi kiinteistöistä on lentokenttä, jossa kilpailijasi on parhaillaan. Ilmoitat
+henkilökunnalle, että kyseinen henkilö on identiteettivaras. Sotkun selvittämisessä voi
+mennä hetki. Hän menettää vuoron.', 1, 0);
+
+INSERT INTO cards (type, flavour_text, effect, score)
+VALUES ('Sabotaasi', 'Juorukello: Tapaat seuraavaa lentoa odottaessasi tunnetun juorublogin ylläpitäjän.
+Syötät hänelle kenties totuuden mukaisen version kilpailijasi rakkauselämästä. Tieto
+leviää nopeasti. Hän kiireisesti yrittää pelastaa avioliittonsa puhelimen välityksellä, joten hän unohti lentonsa. Hän menettää vuoron.', 1, 0);
+
+INSERT INTO cards (type, flavour_text, effect, score)
+VALUES ('Sabotaasi', 'Jäsenyys vaarassa: Olet onnistunut kaivamaan arkaluontoista tietoa kilpailijasi
+varakkuudesta. Käy ilmi, että hänen sijoituksensa menivät mönkään ja hän ei ollut
+kokonaisen kuukauden ajan biljonääri. Ilmoitat golf-klubin perustajille asiasta ja he
+ottavat syytökset hyvin vakavasti. Rangaistukseksi he vaativat, että kilpailijasi
+odottaa rangaistukseksi yhden vuoron.', 1, 0);
+
+#Huonoa tuuria -kortit
+INSERT INTO cards (type, flavour_text, effect, score)
+VALUES ('Huonoa tuuria', 'Katkera rakastaja: Voi ei! Rikas malli, jonka jätit hänen parhaan ystävänsä takia, on
+nähnyt sosiaalisesta mediasta osallistumisestasi Lentopeliin. Hän on päättänyt
+kostaa hänen sydämensä särkemisen. Hän antaa lehdistölle vihiä omistamastasi
+tehtaasta, jonka päästöt tällä samaisella hetkellä tekevät enemmän haittaa ilmastolle
+kuin pieni valtio ikinä voisi. Toimittajat ja ympäristöaktivistit valtaavat kentän, jossa
+olet. Kaaos pysäyttää lennot täysin. Menetät vuoron.', 2, 0);
+
+INSERT INTO cards (type, flavour_text, effect, score)
+VALUES ('Huonoa tuuria', ' Raha pysyy perheessä: Auts! Puolisosi teki sukututkimusta huvin vuoksi ja kävikin
+ilmi, että teillä on samat vanhemmat. No, sanoit aina hänelle kovin ylpeänä, että
+hänen viehättävin piirteensä on se, että hän muistuttaa kovasti sinua. Yllätys
+kuitenkin kirpaisee vatsasta, ja huomaat tarvitsevasi hiukan yksityistä aikaa
+vessanpöntön ääressä. (Toivottavasti tämä koskee rakastajistasi vain yhtä) Menetät
+vuoron.', 2, 0);
+
+INSERT INTO cards (type, flavour_text, effect, score)
+VALUES ('Huonoa tuuria', 'Lakisyyte: Maailman Luonnon Säätiö, WWF, haastaa yhden yrityksistäsi oikeuteen.
+Näyttää siltä, että vanha työntekijäsi on tunnustanut osallistumisestasi uhanalaisten
+lajien metsästys kilpailuihin viime vuonna. Asianajajasi onnistui siirtämään
+oikeudenkäynnin lähemmäs nykyistä sijaintiasi. Osallistuminen vaatii sinua
+matkustamaan kolme kenttää taaksepäin.', 3, 0);
+ 
+ #Onnenpekka-kortit
+INSERT INTO cards (type, flavour_text, effect, score) 
+VALUES ('Onnenpekka', 'Imperiumi kasvaa: Hyviä uutisia bisnesmaailmasta! Vanha kilpailijasi kuoli äskettäin 
+traagisessa onnettomuudessa ja hänen yrityksensä myydään. Johtokunnan jäsenet 
+toimivat ripeästi ja löivät puolestasi rahoiksi. He päättivät lähteä matkalle 
+juhlistamaan tilaisuutta. Sattumoisin he ovat pysähtyneet tankkaamaan
+yksityiskonettaan samalle kentälle, jossa olet. He tarjoavat sinulle hiukan apua 
+matkallasi seuraavaan kohteeseen. Etene kolme kenttää eteenpäin.', 4, 0);
+ 
+INSERT INTO cards (type, flavour_text, effect, score) 
+VALUES ('Onnenpekka', 'Tietorikas: Nähtävästi tiedemiehet, joita olet rahoittanut ovat keksineet lyhyen
+kantaman teleportti- laitteen. Laitteen potentiaalisista haitoista tai rajoista ei ole vielä
+tietoa, mutta rakas ei odota tai jonota. Etenet sillä kolme kenttää eteenpäin.', 4, 0);
+ 
+ 
+INSERT INTO cards (type, flavour_text, effect, score) 
+VALUES ('Onnenpekka', 'Ilmastonmuutos on puolellasi: Kapteeni saa tiedon lentosi aikana, että rajujen
+säätilojen vuoksi lukuisia lentokenttiä on suljettu. Häntä neuvotaan laskeutumaan
+edemmäs, sillä koko alue on mahdollisesti evakuoitava. Etene kolme kenttää
+eteenpäin.', 4, 0);
+ 
+ #CO-kortit
+INSERT INTO cards (type, flavour_text, effect, score) 
+VALUES ('Hiilidioksidikortti', 'Lennoistasi on aiheutunut päästöjä, joilla on vaikutus ilmastoon. Tuloksena on
+paikallinen rankkasade.', 0, 10);
+
+INSERT INTO cards (type, flavour_text, effect, score) 
+VALUES ('Hiilidioksidikortti', 'Lennoistasi on aiheutunut päästöjä, joilla on vaikutus ilmastoon. Tuloksena on
+paikallinen ukkosmyrsky. Lennot perutaan. Joudut odottamaan vuoron verran sään
+laantumista jatkaaksesi.', 2, 30);
+
+INSERT INTO cards (type, flavour_text, effect, score) 
+VALUES ('Hiilidioksidikortti', 'Lennoistasi on aiheutunut päästöjä, joilla on vaikutus ilmastoon. Tuloksena on
+paikallinen hurrikaani. Lennot perutaan. Joudut odottamaan vuoron verran sään
+laantumista jatkaaksesi', 2, 50);
+
+INSERT INTO cards (type, flavour_text, effect, score) 
+VALUES ('Hiilidioksidikortti', 'PR- tiimisi kehottaa sinua parantamaan julkista imagoasi. Istutit puita keskelle
+moottoritietä, joka johtaa hiilinieluun.', 0, -30);
+ 
