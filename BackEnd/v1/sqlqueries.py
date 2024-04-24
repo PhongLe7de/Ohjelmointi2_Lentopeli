@@ -9,7 +9,7 @@ connection = mysql.connector.connect(
     autocommit=True
 )
 def airport1():
-    sql_airport1 = (f"""SELECT airport.name as 'airport name', country.name as 'country name', country.continent FROM airport 
+    sql_airport1 = (f"""SELECT airport.ident FROM airport 
     INNER JOIN country ON airport.iso_country=country.iso_country
     WHERE airport.name like "%Svalbard%";""")
     cursor = connection.cursor(dictionary=True)
@@ -19,7 +19,7 @@ def airport1():
 
 #Seuraavasta Venäjä pois lähinnä koska se on sekä EU että AS
 def airport2(item):
-    sql_airport2 = (f"""SELECT airport.name as 'airport name', country.name as 'country name', country.continent FROM airport 
+    sql_airport2 = (f"""SELECT airport.ident FROM airport 
     INNER JOIN country ON airport.iso_country=country.iso_country 
     WHERE airport.continent='{item}' and type='large_airport' and country.name!='Russia'
     GROUP BY country.name ORDER BY RAND() LIMIT 7;""")
@@ -28,7 +28,7 @@ def airport2(item):
     result = cursor.fetchall()
     return result
 def airport3():
-    sql_airport3 = (f"""SELECT airport.name as 'airport name', country.name as 'country name', country.continent FROM airport 
+    sql_airport3 = (f"""SELECT airport.ident FROM airport 
     INNER JOIN country ON airport.iso_country=country.iso_country 
     WHERE airport.continent='AN' and type='medium_airport' 
     ORDER BY RAND() LIMIT 1;""")
