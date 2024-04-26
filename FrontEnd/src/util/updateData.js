@@ -1,6 +1,6 @@
 const URL = ''; //waiting for URL from BackEnd
 
-export const updateData = async (URL, player, data) => {
+const updateData = async (URL, player, data) => {
     try {
       const response = await fetch(URL, {
         method: "PATCH",

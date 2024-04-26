@@ -1,30 +1,39 @@
-import axios from "axios";
 
-const URL = ''; //waiting for URL from BackEnd
-export const handleDiceRolling = (player) => {
-  const player = player;
-  const randomDiceValue = Math.floor(Math.random() * 6 + 1);
-  const randomDiceImg = (player = 1
-    ? "diceRed" + randomDiceValue + ".png"
-    : "diceBlue" + randomNumber + ".png");
-  const getDiceImgElement = document.getElementsByClassName("diceValueImage");
-  getDiceImgElement.setAttribute("scr", `assets/img/dice/${randomDiceImg}`);
-  return randomDiceValue;
+const getDicePopUpElement = document.getElementById('modal-dice')
+const player = 2;
+const handleDiceRolling = () => {
+  const checkClass = getDicePopUpElement.classList
+  if (checkClass[0] === 'open'){
+    const randomDiceValue = Math.floor(Math.random() * 6 + 1);
+    const randomDiceImg = (player == 1
+      ? "diceRed" + randomDiceValue + ".png"
+      : "diceBlue" + randomDiceValue + ".png");
+    const getDiceImgElement = document.querySelector(".dice-img");
+    getDiceImgElement.src = `assets/img/dice/${randomDiceImg}`
+    return randomDiceValue;
+  } else{
+    console.log('window is not open');
+  }
 };
 
-const handleShowDicePopUp = () =>{
-  const getDicePopUpElement = document.getElementById('modal-dice')
-  getDicePopUpElement.classList.add('open')
+const handleShowDicePopUp = () =>{  
+  const checkClass = getDicePopUpElement.classList
+  if (checkClass[0] === 'open'){
+    getDicePopUpElement.classList.remove('open');
+    getDicePopUpElement.classList.add('close')
+  } else{
+    getDicePopUpElement.classList.remove('close');
+    getDicePopUpElement.classList.add('open')
+  }
 }
 
-const handleCloseDicePopUp = () =>{
-  const getDicePopUpElement = document.getElementById('modal-dice')
-  getDicePopUpElement.classList.add('close')
-}
-
-const getDiceBtn = document.getElementById('btn-dice')
+const getDiceBtn = document.querySelector('.btn-dice')
 getDiceBtn.addEventListener('click',handleShowDicePopUp)
 
-// const popUpRollWindow = ()
+const getRollfeature = document.querySelector('.roll-feature')
+getRollfeature.addEventListener('click',handleDiceRolling)
+
+const getPlayernameElement = document.querySelector('.player-dice-rolling')
+getPlayernameElement.innerHTML = `${player}`
 
 
