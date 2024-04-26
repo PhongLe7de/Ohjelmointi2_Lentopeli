@@ -2,6 +2,7 @@ import database
 
 import airports
 
+
 class GameBoard:
 
     def __init__(self):
