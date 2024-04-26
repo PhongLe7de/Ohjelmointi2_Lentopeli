@@ -1,6 +1,6 @@
 const URL = ''; //waiting for URL from BackEnd
 
-export const fetchAPI = async (URL) =>{
+const fetchAPI = async (URL) =>{
     try {
         const response = await fetch(URL,{
             method:'GET',

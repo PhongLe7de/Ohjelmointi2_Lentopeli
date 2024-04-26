@@ -1,11 +1,7 @@
-import { handleDiceRolling } from "./src/diceRolling"
-import { updateData } from "./src/util/updateData"
+// const player = 1 //get from HTML
+// const diceValue = handleDiceRolling(player)
 
-const player = 1 //get from HTML
+// URL_API = '' //waiting for backend url
 
-const diceValue = handleDiceRolling(player)
-
-URL_API = '' //waiting for backend url
-
-const result = updateData(URL_API, player ,diceValue)
+// const result = updateData(URL_API, player ,diceValue)
 
