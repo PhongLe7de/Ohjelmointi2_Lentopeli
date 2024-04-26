@@ -31,6 +31,7 @@ DROP table goal_reached;
 DROP table goal;
 DROP table game_player; #TÄMÄ VASTA VIKAKSI
 
+
 #Pelikenttätaulu, periaatteessa pitäisi ehkä olla FK airport tauluun, jotta varmasti olemassa oleva ident tulee arvoksi
 CREATE TABLE gameboard (
     ID int NOT NULL AUTO_INCREMENT,
