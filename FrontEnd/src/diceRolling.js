@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const URL = ''; //waiting for URL from BackEnd
-
 export const handleDiceRolling = (player) => {
   const player = player;
   const randomDiceValue = Math.floor(Math.random() * 6 + 1);
@@ -13,6 +12,19 @@ export const handleDiceRolling = (player) => {
   return randomDiceValue;
 };
 
+const handleShowDicePopUp = () =>{
+  const getDicePopUpElement = document.getElementById('modal-dice')
+  getDicePopUpElement.classList.add('open')
+}
 
+const handleCloseDicePopUp = () =>{
+  const getDicePopUpElement = document.getElementById('modal-dice')
+  getDicePopUpElement.classList.add('close')
+}
+
+const getDiceBtn = document.getElementById('btn-dice')
+getDiceBtn.addEventListener('click',handleShowDicePopUp)
+
+// const popUpRollWindow = ()
 
 
