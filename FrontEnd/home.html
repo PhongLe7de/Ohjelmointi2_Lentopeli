@@ -4,8 +4,6 @@
     <meta charset="UTF-8" />
     <title>Lentopeli</title>
     <link href="assets/styles/styles.css" rel="stylesheet" />
-
-    <script defer src="src/diceRolling.js"></script>
     <script defer src="continents/af.js"></script>
     <script defer src="continents/an.js"></script>
     <script defer src="continents/as.js"></script>
@@ -13,11 +11,17 @@
     <script defer src="continents/na.js"></script>
     <script defer src="continents/oc.js"></script>
     <script defer src="continents/sa.js"></script>
+    <script defer src="/FrontEnd/index.js"></script>
+    <script defer src="src/diceRolling.js"></script>
+
     <script defer src="map.js"></script>
-            
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""/>
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
 
     <script
       src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -37,6 +41,16 @@
     </header>
 
     <div class="container">
+      <div id="btn-dice-container">
+        <div id="btn-dice-section">
+          <div>
+            <button class="btn-dice openwindow">OPEN</button>
+          </div>
+          <div>
+            <button class="btn-dice roll-feature">Roll</button>
+          </div>
+        </div>
+      </div>
       <div id="map">
         <p>Kartta</p>
       </div>
@@ -137,16 +151,11 @@
       <p>Ryhmä B - Lentopeli @ Metropolia 2024</p>
     </footer>
 
-    <div id="btn-dice">
-        <div>
-            <button class="btn-dice-style">Roll</button>
-        </div>
-    </div>
+
     <div id="modal-dice" class="open">
       <div id="modal-dice-container">
-        <span class="xspan">&#x2715;</span>
         <div>
-          <h1>Player</h1>
+          <h1 class="player-dice-rolling">Player</h1>
         </div>
         <img class="dice-img" src="assets/img/dice/diceBlue1.png" />
       </div>
