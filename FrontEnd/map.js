@@ -7,10 +7,6 @@ L.polygon([[51.509, -0.08], [30, 50], [10, 0]], {color: "rgb(50,5,5)"}).addTo(ma
 L.polygon([[0, -50], [50, -50], [10, -60]], {color: "rgb(5,5,50)"}).addTo(map).bindPopup("Pony gone.");
 map.on('click', (e)=>{L.popup().setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString()).openOn(map);});
 
-
-
-
-
 function drawTheRoute(route){
     L.polyline(route, {color: 'red'}).addTo(map);
     for(let place of route){
