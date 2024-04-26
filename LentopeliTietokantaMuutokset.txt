@@ -26,6 +26,78 @@ CREATE TABLE cards (
     UNIQUE (flavour_text)
 );
 
+#Turhien pöytien poisto:
+DROP table goal_reached;
+DROP table goal;
+DROP table game_player; #TÄMÄ VASTA VIKAKSI
+
+
+#Pelikenttätaulu, periaatteessa pitäisi ehkä olla FK airport tauluun, jotta varmasti olemassa oleva ident tulee arvoksi
+CREATE TABLE gameboard (
+    ID int NOT NULL AUTO_INCREMENT,
+    space1 varchar(40),
+	space2 varchar(40),
+	space3 varchar(40),
+	space4 varchar(40),
+	space5 varchar(40),
+	space6 varchar(40),
+    space7 varchar(40),
+    space8 varchar(40),
+    space9 varchar(40),
+    space10 varchar(40),
+    space11 varchar(40),
+    space12 varchar(40),
+    space13 varchar(40),
+    space14 varchar(40),
+    space15 varchar(40),
+    space16 varchar(40),
+    space17 varchar(40),
+    space18 varchar(40),
+    space19 varchar(40),
+    space20 varchar(40),
+    space21 varchar(40),
+    space22 varchar(40),
+    space23 varchar(40),
+    space24 varchar(40),
+    space25 varchar(40),
+    space26 varchar(40),
+    space27 varchar(40),
+    space28 varchar(40),
+    space29 varchar(40),
+    space30 varchar(40),
+    space31 varchar(40),
+    space32 varchar(40),
+    space33 varchar(40),
+    space34 varchar(40),
+    space35 varchar(40),
+    space36 varchar(40),
+    space37 varchar(40),
+    space38 varchar(40),
+    space39 varchar(40),
+    space40 varchar(40),
+    space41 varchar(40),
+    space42 varchar(40),
+    space43 varchar(40),
+    space44 varchar(40),
+    PRIMARY KEY (ID)
+);
+
+#Yhdistetään game_player olemassa olevaan game-tauluun (koska siinä valmiiksi location FK airport tauluun)
+
+ALTER TABLE game
+DROP COLUMN co2_consumed,
+DROP COLUMN co2_budget,
+DROP COLUMN screen_name,
+DROP COLUMN co2_left;
+
+ALTER TABLE game ADD (
+    player_name varchar(255),
+	gameid int DEFAULT 0,
+	score int DEFAULT 0,
+    effect_skip_turns int DEFAULT 0,
+	UNIQUE (player_name)
+);
+
 
 #Sabotaasi-kortit
 INSERT INTO cards (type, flavour_text, effect, score)
