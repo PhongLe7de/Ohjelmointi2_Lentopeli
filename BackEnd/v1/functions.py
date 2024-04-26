@@ -13,7 +13,7 @@ def instructions():
 
 def create_gameboard():
     board = []
-    sql_start=sqlqueries.airport1() #Svalbard eka ruutu
+    sql_start= sqlqueries.airport1() #Svalbard eka ruutu
     board.append(sql_start)
 
     continents=['EU','AS','OC','AF', 'NA', 'SA'] #Yksi kenttä/maa
