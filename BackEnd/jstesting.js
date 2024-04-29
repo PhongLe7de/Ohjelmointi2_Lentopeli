@@ -30,6 +30,7 @@ async function updateScore(player_name, points) {
   }
 }
 
+
 async function getEffect(player_name) {
   try {
     const response = await fetch(`http://127.0.0.1:3000/effect/${player_name}`);
