@@ -27,7 +27,3 @@ def airport3():
     cursor.execute(sql_airport3)
     end = cursor.fetchone()
     return end
-
-print(airport1())
-print(airport2('AS'))
-print(airport3())
