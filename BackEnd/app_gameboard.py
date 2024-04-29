@@ -1,9 +1,13 @@
-from flask import Flask
+import json
+
+from flask import Flask, Response
+from flask_cors import CORS
+
 import airports
 import database
 
 app = Flask(__name__)
-
+cors = CORS(app)
 def insert_to_database(airports):
     space_list = [f"space{i}" for i in range(1, 45)]
     space_columns = ""
@@ -41,7 +45,8 @@ def initialize():
 def gameboard():
     try:
         result = initialize()
-        return result
+        result_json = json.dumps(result)
+        return Response(response=result_json, mimetype="application/json")
     except:
         return {"Error": "Invalid parameters", "Status": 400}
 
