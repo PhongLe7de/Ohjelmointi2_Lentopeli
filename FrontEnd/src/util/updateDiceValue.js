@@ -1,4 +1,4 @@
-const URL = ''; //waiting for URL from BackEnd
+const URL = `/move_player/<player_name>/<int:dice>`; 
 
 const getDicePopUpElement = document.getElementById('modal-dice')
 const player = 2;

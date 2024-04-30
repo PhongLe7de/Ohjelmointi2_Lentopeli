@@ -1,3 +1,4 @@
+player = 2
 const handleShowDicePopUp = () =>{  
   const checkClass = getDicePopUpElement.classList
   if (checkClass[0] === 'open'){
