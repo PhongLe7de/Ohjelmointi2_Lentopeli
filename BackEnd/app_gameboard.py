@@ -56,9 +56,6 @@ def check_player(player_name):
     cursor = database.connection.cursor()
     cursor.execute(sql_player_check)
     result = cursor.fetchone()
-    print(result)
-    print("SQL Query:", sql_player_check)
-    print("Fetched Results:", result)
     if result:
         return True
     else:
