@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8">
     <title>Lentopeli</title>
-    <link href="assets/styles/styles.css" rel="stylesheet" />
+    <link href="assets/styles/styles.css" rel="stylesheet">
 
-    <script defer src="src/diceRolling.js"></script>
     <script defer src="continents/af.js"></script>
     <script defer src="continents/an.js"></script>
     <script defer src="continents/as.js"></script>
@@ -19,137 +18,78 @@
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
     crossorigin=""/>
 
-    <script
-      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-      crossorigin=""
-    ></script>
-  </head>
-  <body>
-    <header>
-      <nav class="navigation">
-        <p class="logo">ÖKYRIKAS JA RUTIKUIVA</p>
-        <ul>
-          <li>Intro</li>
-          <li>Tallennetut pelit</li>
-        </ul>
-      </nav>
-    </header>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+</head>
+<body>
+<header>
+    <nav class="navigation">
+    <p class="logo">ÖKYRIKAS JA RUTIKUIVA</p>
+    <ul>
+        <li>Intro</li>
+        <li>Tallennetut pelit</li>
+    </ul>
+</nav>
+</header>
 
-    <div class="container">
-      <div id="map">
+<div class="container">
+    <div id="map">
         <p>Kartta</p>
-      </div>
-      <div class="player-boxes">
+    </div>
+    <div class="player-boxes">
         <div class="player-1">
-          <div class="stamps-player-1">
-            <h4>Kerätyt leimat</h4>
-            <div id="passport-1">
-              <img
-                class="AS-stamp"
-                src="assets/leimat_EI/AS_EI_saavutettu.png"
-                alt="AS ei saavutettu"
-              />
-              <img
-                class="AF-stamp"
-                src="assets/leimat_EI/AF_EI_saavutettu.png"
-                alt="AF ei saavutettu"
-              />
-              <img
-                class="EU-stamp"
-                src="assets/leimat_EI/EU_EI_saavutettu.png"
-                alt="EU ei saavutettu"
-              />
-              <img
-                class="NA-stamp"
-                src="assets/leimat_EI/NA_EI_saavutettu.png"
-                alt="EU ei saavutettu"
-              />
-              <img
-                class="SA-stamp"
-                src="assets/leimat_EI/SA_EI_saavutettu.png"
-                alt="SA ei saavutettu"
-              />
-              <img
-                class="OC-stamp"
-                src="assets/leimat_EI/OC_EI_saavutettu.png"
-                alt="OC ei saavutettu"
-              />
+            <div class="stamps-player-1">
+                <h4>Kerätyt leimat</h4>
+                <div id="passport-1">
+                    <img class="AS-stamp" src="assets/leimat_EI/AS_EI_saavutettu.png" alt="AS ei saavutettu">
+                    <img class="AF-stamp" src="assets/leimat_EI/AF_EI_saavutettu.png" alt="AF ei saavutettu">
+                    <img class="EU-stamp" src="assets/leimat_EI/EU_EI_saavutettu.png" alt="EU ei saavutettu">
+                    <img class="NA-stamp" src="assets/leimat_EI/NA_EI_saavutettu.png" alt="EU ei saavutettu">
+                    <img class="SA-stamp" src="assets/leimat_EI/SA_EI_saavutettu.png" alt="SA ei saavutettu">
+                    <img class="OC-stamp" src="assets/leimat_EI/OC_EI_saavutettu.png" alt="OC ei saavutettu">
+                </div>
             </div>
-          </div>
-          <table id="player-1-info">
-            <tr>
-              <th><span id="p1-name">Pelaaja 1</span></th>
-            </tr>
-            <tr>
-              <td>Pisteet: <span id="p1-points">0</span></td>
-            </tr>
-            <tr>
-              <td>Odotus: <span id="p1-wait">0</span></td>
-            </tr>
-          </table>
+            <table id="player-1-info">
+                <tr>
+                    <th><span id="p1-name">Pelaaja 1</span></th>
+                </tr>
+                <tr>
+                    <td>Pisteet: <span id="p1-points">0</span></td>
+                </tr>
+                <tr>
+                    <td>Odotus: <span id="p1-wait">0</span></td>
+                </tr>
+            </table>
         </div>
         <div class="player-2">
-          <div class="stamps-player-2">
-            <h4>Kerätyt leimat</h4>
-            <div id="passport-2">
-              <img
-                src="assets/leimat_EI/AS_EI_saavutettu.png"
-                alt="AS ei saavutettu"
-              />
-              <img
-                src="assets/leimat_EI/AF_EI_saavutettu.png"
-                alt="AF ei saavutettu"
-              />
-              <img
-                src="assets/leimat_EI/EU_EI_saavutettu.png"
-                alt="EU ei saavutettu"
-              />
-              <img
-                src="assets/leimat_EI/NA_EI_saavutettu.png"
-                alt="EU ei saavutettu"
-              />
-              <img
-                src="assets/leimat_EI/SA_EI_saavutettu.png"
-                alt="SA ei saavutettu"
-              />
-              <img
-                src="assets/leimat_EI/OC_EI_saavutettu.png"
-                alt="OC ei saavutettu"
-              />
+            <div class="stamps-player-2">
+                <h4>Kerätyt leimat</h4>
+                <div id="passport-2">
+                    <img src="assets/leimat_EI/AS_EI_saavutettu.png" alt="AS ei saavutettu">
+                    <img src="assets/leimat_EI/AF_EI_saavutettu.png" alt="AF ei saavutettu">
+                    <img src="assets/leimat_EI/EU_EI_saavutettu.png" alt="EU ei saavutettu">
+                    <img src="assets/leimat_EI/NA_EI_saavutettu.png" alt="EU ei saavutettu">
+                    <img src="assets/leimat_EI/SA_EI_saavutettu.png" alt="SA ei saavutettu">
+                    <img src="assets/leimat_EI/OC_EI_saavutettu.png" alt="OC ei saavutettu">
+                </div>
             </div>
-          </div>
-          <table id="player-2-info">
-            <tr>
-              <th><span id="p2-name">Pelaaja 2</span></th>
-            </tr>
-            <tr>
-              <td>Pisteet: <span id="p2-points">0</span></td>
-            </tr>
-            <tr>
-              <td>Odotus: <span id="p2-wait">0</span></td>
-            </tr>
-          </table>
-        </div>
-      </div>
-    </div>
-    <footer>
-      <p>Ryhmä B - Lentopeli @ Metropolia 2024</p>
-    </footer>
-
-    <div id="btn-dice">
-        <div>
-            <button class="btn-dice-style">Roll</button>
+            <table id="player-2-info">
+                <tr>
+                    <th><span id="p2-name">Pelaaja 2</span></th>
+                </tr>
+                <tr>
+                    <td>Pisteet: <span id="p2-points">0</span></td>
+                </tr>
+                <tr>
+                    <td>Odotus: <span id="p2-wait">0</span></td>
+                </tr>
+            </table>
         </div>
     </div>
-    <div id="modal-dice" class="open">
-      <div id="modal-dice-container">
-        <span class="xspan">&#x2715;</span>
-        <div>
-          <h1>Player</h1>
-        </div>
-        <img class="dice-img" src="assets/img/dice/diceBlue1.png" />
-      </div>
-    </div>
-  </body>
+</div>
+<footer>
+    <p>Ryhmä B - Lentopeli @ Metropolia 2024</p>
+</footer>
+</body>
 </html>
