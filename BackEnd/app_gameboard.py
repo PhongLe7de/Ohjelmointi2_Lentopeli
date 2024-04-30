@@ -20,7 +20,6 @@ def insert_to_database(airports):
     cursor = database.connection.cursor()
     cursor.execute(sql_insert, values)
     database.connection.commit()
-
     cursor.execute("SELECT LAST_INSERT_ID()")
     last_gameid = cursor.fetchone()[0]
     return last_gameid
@@ -41,18 +40,32 @@ def initialize():
             board.append(airport)
     sql_end = airports.airport3()  # Maali Antarcticassa
     board.append(sql_end)
+    gameid = insert_to_database(board)
+    return gameid
 
-    insert_to_database(board)
-    return board
+def airport_icao(icao):
+    sql = f"SELECT airport.ident, airport.latitude_deg, longitude_deg FROM airport WHERE airport.ident = '{icao}'"
+    cursor = database.connection.cursor(dictionary=True)
+    cursor.execute(sql)
+    result = cursor.fetchone()
+    return result
 
-#Kun tarvitsee pelikenttiä testaukseen:
-# @app.route('/gameboard')
-# def get_gameboard():
-#     try:
-#         result = initialize()
-#         return result
-#     except:
-#         return {"Error": "Invalid parameters", "Status": 400}
+print(airport_icao("ENSB"))
+def game_board(gameid):
+    sql = f"SELECT * FROM gameboard WHERE id=2"
+    cursor = database.connection.cursor(dictionary=True)
+    cursor.execute(sql)
+    board = cursor.fetchone()
+    space_list = [f"space{i}" for i in range(1, 45)]
+    icao_list = []
+    for key, value in board.items():
+        if key.startswith('space'):
+            icao_list.append(value)
+    airport_list = []
+    for icao in icao_list:
+        airport_list.append(airport_icao(icao))
+    return airport_list
+
 
 def check_player(player_name):
     sql_player_check = f"SELECT player_name FROM game WHERE player_name='{player_name}';"
@@ -92,6 +105,15 @@ def start(player1_name, player2_name):
             register_player(player2_name, gameid)
             return {"gameid": f'{gameid}', "player1": f'{player1_name}', "player2": f'{player2_name}'}
 
+    except:
+        return {"Error": "Invalid parameters", "Status": 400}
+
+
+@app.route('/gameboard/<int:id>')
+def get_gameboard(id):
+    try:
+        result = game_board(id)
+        return result
     except:
         return {"Error": "Invalid parameters", "Status": 400}
 

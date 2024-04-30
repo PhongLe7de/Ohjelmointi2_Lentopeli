@@ -3,8 +3,8 @@ import mysql.connector
 connection = mysql.connector.connect(
     host='localhost',
     port=3306,
-    database='lentopeli',
+    database='flight_game',
     user='root',
-    password='Khanhdung1509',
+    password='root',
     autocommit=True
 )
