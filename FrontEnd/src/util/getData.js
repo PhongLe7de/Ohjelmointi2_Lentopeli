@@ -1,20 +1,4 @@
-<<<<<<< HEAD
-const URL = ''; //waiting for URL from BackEnd
 
-const fetchAPI = async (URL) =>{
-    try {
-        const response = await fetch(URL,{
-            method:'GET',
-            headers:{
-                'Content-type':'application/json'
-            }
-        })
-        response ? console.log(response) : console.log('Fetch API FAIL');
-    } catch (error) {
-        console.log(error);
-    }   
-}
-=======
 const URL_API = 'http://localhost:3000/gameboard'; //waiting for URL from BackEnd
 
 const fetchAPI = async () => {
@@ -36,4 +20,3 @@ const fetchAPI = async () => {
 } 
 fetchAPI()
 
->>>>>>> origin/main

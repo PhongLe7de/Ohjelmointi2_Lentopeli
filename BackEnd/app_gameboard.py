@@ -1,12 +1,12 @@
 from flask import Flask
 import airports
 import database
-from flask_cors import CORS
+
+from flask_cors import CORS # type: ignore
 
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
-
 
 def insert_to_database(airports):
     space_list = [f"space{i}" for i in range(1, 45)]
@@ -43,14 +43,29 @@ def initialize():
     gameid = insert_to_database(board)
     return gameid
 
-#Kun tarvitsee pelikenttiä testaukseen:
-# @app.route('/gameboard')
-# def get_gameboard():
-#     try:
-#         result = initialize()
-#         return result
-#     except:
-#         return {"Error": "Invalid parameters", "Status": 400}
+def airport_icao(icao):
+    sql = f"SELECT airport.ident, airport.latitude_deg, longitude_deg FROM airport WHERE airport.ident = '{icao}'"
+    cursor = database.connection.cursor(dictionary=True)
+    cursor.execute(sql)
+    result = cursor.fetchone()
+    return result
+
+print(airport_icao("ENSB"))
+def game_board(gameid):
+    sql = f"SELECT * FROM gameboard WHERE id=2"
+    cursor = database.connection.cursor(dictionary=True)
+    cursor.execute(sql)
+    board = cursor.fetchone()
+    space_list = [f"space{i}" for i in range(1, 45)]
+    icao_list = []
+    for key, value in board.items():
+        if key.startswith('space'):
+            icao_list.append(value)
+    airport_list = []
+    for icao in icao_list:
+        airport_list.append(airport_icao(icao))
+    return airport_list
+
 
 def check_player(player_name):
     sql_player_check = f"SELECT player_name FROM game WHERE player_name='{player_name}';"
@@ -89,10 +104,19 @@ def start(player1_name, player2_name):
             register_player(player1_name, gameid)
             register_player(player2_name, gameid)
             return {"gameid": f'{gameid}', "player1": f'{player1_name}', "player2": f'{player2_name}'}
+
+    except:
+        return {"Error": "Invalid parameters", "Status": 400}
+
+
+@app.route('/gameboard/<int:id>')
+def get_gameboard(id):
+    try:
+        result = game_board(id)
+        return result
     except:
         return {"Error": "Invalid parameters", "Status": 400}
 
 if __name__ == "__main__":
     app.run(use_reloader=True, host='127.0.0.1', port=3000)
-
 
