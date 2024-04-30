@@ -1,5 +1,5 @@
 
-const map = L.map('map').setView([20, 0], 1);
+// const map = L.map('map').setView([20, 0], 1);
 
 //L.marker([60, 20]).addTo(map).bindPopup("<b>The World!</b><br>Time has stopped!").openPopup();
 //L.marker([27, -82], {icon: L.icon({iconUrl: "jotaro.jpg", iconSize: [80, 80]})}).addTo(map);
