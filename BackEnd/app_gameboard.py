@@ -2,7 +2,7 @@ from flask import Flask
 import airports
 import database
 
-from flask_cors import CORS
+from flask_cors import CORS # type: ignore
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -44,9 +44,6 @@ def initialize():
 
     insert_to_database(board)
     return board
-
-
-
 
 #Kun tarvitsee pelikenttiä testaukseen:
 # @app.route('/gameboard')
