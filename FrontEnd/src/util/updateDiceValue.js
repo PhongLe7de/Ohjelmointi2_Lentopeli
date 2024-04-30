@@ -1,9 +1,13 @@
 const URL = ''; //waiting for URL from BackEnd
 
 const player = 2;
+
 const handleDiceRolling = (player) => {
+  console.log('a');
   const checkClass = getDicePopUpElement.classList
+  console.log(checkClass);
   if (checkClass[0] === 'open'){
+    console.log('a');
     const randomDiceValue = Math.floor(Math.random() * 6 + 1);
     const randomDiceImg = (player == 1
       ? "diceRed" + randomDiceValue + ".png"
@@ -24,7 +28,6 @@ const getRollfeature = document.querySelector('.roll-feature')
 const a = getRollfeature.addEventListener('click',()=>{handleDiceRolling(player)})
 
 const updateData = async (URL, player,data) => {
-
 
     console.log(data);
     try {
