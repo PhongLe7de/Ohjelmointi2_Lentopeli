@@ -1,6 +1,13 @@
-<<<<<<< HEAD
-from flask import Flask
+
 import database
+from flask import Flask, Response
+import database
+from flask_cors import CORS
+import json
+
+app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 app = Flask(__name__)
 
@@ -51,21 +58,11 @@ def player_move(self, dice,):
         new_index = 43
     return game_spaces[new_index]
 
-@app.route('/player_location/<player_name>/')
-def player_location(player_name):
-    try:
-        result = player_location(player_name)
-        return result
-=======
-from flask import Flask, Response
-import database
-from flask_cors import CORS
-import json
-
-app = Flask(__name__)
-cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
-
+# @app.route('/player_location/<player_name>/')
+# def player_location(player_name):
+#     try:
+#         result = player_location(player_name)
+#         return result
 
 class Game:
     def __init__(self, gameid):
@@ -175,12 +172,10 @@ def player_effect_update(player_name, effect):
         result = app_player.effect_skip_turn_update(effect)
         jsonresult = json.dumps(result)
         return Response(response=jsonresult, mimetype="application/json")
->>>>>>> origin/main
     except:
         return {"Error": "Invalid parameters", "Status": 400}
 
 
-<<<<<<< HEAD
 @app.route('/move_player/<player_name>')
 def move_player(player_name):
     try:
@@ -193,9 +188,7 @@ if __name__ == "__main__":
     app.run(use_reloader=True, host='127.0.0.1', port=3000)
 
 
-player_location('Nea')
 
-=======
 @app.route('/score/<player_name>')
 def player_score(player_name):
     try:
@@ -219,4 +212,3 @@ def player_score_update(player_name, points):
 
 if __name__ == "__main__":
     app.run(use_reloader=True, host='127.0.0.1', port=3000)
->>>>>>> origin/main

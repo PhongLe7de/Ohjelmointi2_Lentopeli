@@ -81,7 +81,7 @@ async function getSurpriseCard(){
   }
 }
 
-//startGame("Vika", "Testi") // Konsolissa: {gameid: '29', player1: 'Vika', player2: 'Testi'}
+startGame("Maa", "Ti") // Konsolissa: {gameid: '29', player1: 'Vika', player2: 'Testi'}
 
 //getEffect("Nea") // Konsolissa: {effect_skip_turns: 0}
 //updateEffect("Nea", 1) // Konsolissa: {message: 'odotusarvo päivitetty'}

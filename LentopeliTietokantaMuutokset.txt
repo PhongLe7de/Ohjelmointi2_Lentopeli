@@ -84,11 +84,12 @@ CREATE TABLE gameboard (
 
 #Yhdistetään game_player olemassa olevaan game-tauluun (koska siinä valmiiksi location FK airport tauluun)
 
-ALTER TABLE game
-DROP COLUMN co2_consumed,
-DROP COLUMN co2_budget,
-DROP COLUMN screen_name,
-DROP COLUMN co2_left;
+ALTER TABLE game DROP COLUMN co2_consumed;
+ALTER TABLE game DROP COLUMN co2_budget;
+ALTER TABLE game DROP COLUMN screen_name,
+ALTER TABLE game DROP COLUMN co2_left;
+
+ALTER TABLE game MODIFY COLUMN id INT AUTO_INCREMENT;
 
 ALTER TABLE game ADD (
     player_name varchar(255),
