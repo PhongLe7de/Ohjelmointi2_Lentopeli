@@ -136,11 +136,12 @@ footer {
     /* justify-content: center; */
     align-items: center;
 }
+
 .open{
     display: flex;
-}
-.close{
-    display: none
+    animation:modalRollingDiceOpen ease 0.5s ;
+ }.close{
+    display: none;
 }
 #modal-dice-container h1 {
     margin-top: 32px;
@@ -179,3 +180,11 @@ footer {
     background-color: orange;
 }
 
+@keyframes modalRollingDiceOpen {
+    from{
+        transform: scale(0.5) translate(-100%, -100%);
+    }
+    to {
+        transform: scale(1) translate(0, 0);
+    }
+}

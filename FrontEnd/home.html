@@ -12,7 +12,10 @@
     <script defer src="continents/oc.js"></script>
     <script defer src="continents/sa.js"></script>
     <script defer src="/FrontEnd/index.js"></script>
-    <script defer src="src/diceRolling.js"></script>
+    <script defer src="src/diceWindowPopUp.js"></script>
+    <script defer src="src/util/getData.js"></script>
+    <script defer src="src/util/updateDiceValue.js"></script>
+    <script defer src="src/stampCollecting.js"></script>
 
     <script defer src="map.js"></script>
 
@@ -27,7 +30,10 @@
       src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
-    ></script>
+
+      
+    >
+  </script>
   </head>
   <body>
     <header>
@@ -106,28 +112,35 @@
         <div class="player-2">
           <div class="stamps-player-2">
             <h4>Kerätyt leimat</h4>
+
             <div id="passport-2">
               <img
+                class="AS-stamp"
                 src="assets/leimat_EI/AS_EI_saavutettu.png"
                 alt="AS ei saavutettu"
               />
               <img
+                class="AF-stamp"
                 src="assets/leimat_EI/AF_EI_saavutettu.png"
                 alt="AF ei saavutettu"
               />
               <img
+                class="EU-stamp"
                 src="assets/leimat_EI/EU_EI_saavutettu.png"
                 alt="EU ei saavutettu"
               />
               <img
+                class="NA-stamp"
                 src="assets/leimat_EI/NA_EI_saavutettu.png"
                 alt="EU ei saavutettu"
               />
               <img
+                class="SA-stamp"
                 src="assets/leimat_EI/SA_EI_saavutettu.png"
                 alt="SA ei saavutettu"
               />
               <img
+                class="OC-stamp"
                 src="assets/leimat_EI/OC_EI_saavutettu.png"
                 alt="OC ei saavutettu"
               />
@@ -152,7 +165,7 @@
     </footer>
 
 
-    <div id="modal-dice" class="open">
+    <div id="modal-dice" class="close">
       <div id="modal-dice-container">
         <div>
           <h1 class="player-dice-rolling">Player</h1>
