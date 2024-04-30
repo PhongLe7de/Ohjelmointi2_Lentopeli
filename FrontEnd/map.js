@@ -9,7 +9,6 @@
 //map.on('click', (e)=>{L.popup().setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString()).openOn(map);});
 
 
-
 async function testAjax(){
     const testre = await fetch(`http://127.0.0.1:3000/gameboard`);
     const testre2 = await testre.json();
@@ -23,7 +22,7 @@ async function testAjax(){
     console.log(tyhma);
     drawTheRoute(tyhma);
 }
-testAjax();
+// testAjax();
 
 const map = L.map('map').setView([20, 0], 3.4);
 
