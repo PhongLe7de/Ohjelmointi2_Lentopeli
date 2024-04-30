@@ -1,3 +1,4 @@
+
 const map = L.map('map').setView([20, 0], 1);
 
 //L.marker([60, 20]).addTo(map).bindPopup("<b>The World!</b><br>Time has stopped!").openPopup();
@@ -24,8 +25,14 @@ async function testAjax(){
 }
 testAjax();
 
+const map = L.map('map').setView([20, 0], 3.4);
 
-
+L.marker([60, 20]).addTo(map).bindPopup("<b>The World!</b><br>Time has stopped!").openPopup();
+L.marker([27, -82], {icon: L.icon({iconUrl: "jotaro.jpg", iconSize: [80, 80]})}).addTo(map);
+L.circle([50, 20], {color: 'red', fillColor: '#f03', fillOpacity: 0.5,radius: 500}).addTo(map).bindPopup("pie");
+L.polygon([[51.509, -0.08], [30, 50], [10, 0]], {color: "rgb(50,5,5)"}).addTo(map).bindPopup("Pony gone.");
+L.polygon([[0, -50], [50, -50], [10, -60]], {color: "rgb(5,5,50)"}).addTo(map).bindPopup("Pony gone.");
+map.on('click', (e)=>{L.popup().setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString()).openOn(map);});
 
 function drawTheRoute(route){
     L.polyline(route, {color: 'red'}, {icon: false}).addTo(map);
