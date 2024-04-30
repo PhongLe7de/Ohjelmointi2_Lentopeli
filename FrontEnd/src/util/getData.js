@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/main
 const URL = ''; //waiting for URL from BackEnd
 
 const fetchAPI = async (URL) =>{
@@ -13,6 +16,9 @@ const fetchAPI = async (URL) =>{
     } catch (error) {
         console.log(error);
     }   
+<<<<<<< HEAD
+}
+=======
 }
 =======
 const URL_API = 'http://localhost:3000/gameboard'; //waiting for URL from BackEnd
@@ -36,4 +42,5 @@ const fetchAPI = async () => {
 } 
 fetchAPI()
 
+>>>>>>> origin/main
 >>>>>>> origin/main

@@ -1,12 +1,12 @@
 from flask import Flask
 import airports
 import database
+
 from flask_cors import CORS
 
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
-
 
 def insert_to_database(airports):
     space_list = [f"space{i}" for i in range(1, 45)]
@@ -20,6 +20,7 @@ def insert_to_database(airports):
     cursor = database.connection.cursor()
     cursor.execute(sql_insert, values)
     database.connection.commit()
+
     cursor.execute("SELECT LAST_INSERT_ID()")
     last_gameid = cursor.fetchone()[0]
     return last_gameid
@@ -40,8 +41,12 @@ def initialize():
             board.append(airport)
     sql_end = airports.airport3()  # Maali Antarcticassa
     board.append(sql_end)
-    gameid = insert_to_database(board)
-    return gameid
+
+    insert_to_database(board)
+    return board
+
+
+
 
 #Kun tarvitsee pelikenttiä testaukseen:
 # @app.route('/gameboard')
@@ -89,10 +94,10 @@ def start(player1_name, player2_name):
             register_player(player1_name, gameid)
             register_player(player2_name, gameid)
             return {"gameid": f'{gameid}', "player1": f'{player1_name}', "player2": f'{player2_name}'}
+
     except:
         return {"Error": "Invalid parameters", "Status": 400}
 
 if __name__ == "__main__":
     app.run(use_reloader=True, host='127.0.0.1', port=3000)
-
 
