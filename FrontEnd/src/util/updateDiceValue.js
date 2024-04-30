@@ -1,6 +1,5 @@
 const URL = ''; //waiting for URL from BackEnd
 
-const getDicePopUpElement = document.getElementById('modal-dice')
 const player = 2;
 const handleDiceRolling = (player) => {
   const checkClass = getDicePopUpElement.classList
@@ -36,7 +35,7 @@ const updateData = async (URL, player,data) => {
         },
         body: JSON.stringify({ player, data }),
       });
-  
+
       if (response.ok) {
         console.log("update success");
       } else {

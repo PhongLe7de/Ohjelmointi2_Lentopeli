@@ -175,6 +175,7 @@ footer {
 }
 .open{
     display: flex;
+    animation:modalRollingDiceOpen ease 0.5s ;
 }
 .close{
     display: none
@@ -217,3 +218,11 @@ footer {
     background-color: orange;
 }
 
+@keyframes modalRollingDiceOpen {
+    from{
+        transform: scale(0.5) translate(-100%, -100%);
+    }
+    to {
+        transform: scale(1) translate(0, 0);
+    }
+}

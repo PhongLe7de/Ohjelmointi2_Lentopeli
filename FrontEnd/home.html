@@ -12,6 +12,11 @@
     <script defer src="continents/na.js"></script>
     <script defer src="continents/oc.js"></script>
     <script defer src="continents/sa.js"></script>
+    <script defer src="src/diceWindowPopUp.js"></script>
+    <script defer src="src/diceRolling.js"></script>
+    <script defer src="src/util/getData.js"></script>
+    <script defer src="src/util/updateDiceValue.js"></script>
+    <script defer src="src/stampCollecting.js"></script>
     <script defer src="map.js"></script>
             
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -51,6 +56,16 @@
         </div>
 </div>
 <div class="container" id="game">
+  <div id="btn-dice-container">
+    <div id="btn-dice-section">
+      <div>
+        <button class="btn-dice openwindow">Open</button>
+      </div>
+      <div>
+        <button class="btn-dice roll-feature">Roll</button>
+      </div>
+    </div>
+  </div>
     <div id="map">
         <p>Kartta</p>
     </div>
@@ -108,5 +123,16 @@
 <footer>
     <p>Ryhmä B - Lentopeli @ Metropolia 2024</p>
 </footer>
+
+<div id="modal-dice" class="open">
+  <div id="modal-dice-container">
+    <div>
+      <h1 class="player-dice-rolling">Player</h1>
+    </div>
+    <img class="dice-img" src="assets/img/dice/diceBlue1.png" />
+  </div>
+</div>
+</body>
+</html>
 </body>
 </html>
