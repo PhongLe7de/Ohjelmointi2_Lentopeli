@@ -5,9 +5,13 @@ from flask_cors import CORS
 
 import airports
 import database
+from flask_cors import CORS
 
 app = Flask(__name__)
 cors = CORS(app)
+
+app.config['CORS_HEADERS'] = 'Content-Type'
+
 def insert_to_database(airports):
     space_list = [f"space{i}" for i in range(1, 45)]
     space_columns = ""
