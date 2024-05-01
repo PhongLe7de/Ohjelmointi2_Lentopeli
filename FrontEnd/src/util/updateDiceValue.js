@@ -28,7 +28,7 @@ const handleDiceRolling = (player) => {
     data = {
       value: randomDiceValue
     }
-    const URL = `http://localhost:3000/dicevalue/`; 
+    // const URL = `http://localhost:3000/start_game/`; 
     updateData(URL, player, data)
   } else{
     console.log('window is not open');
@@ -44,7 +44,6 @@ const updateData = async (URL, player,data) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // 'Access-Control-Allow-Origin':'Content-Type'
         },
         body: JSON.stringify({player, data }),
       });
