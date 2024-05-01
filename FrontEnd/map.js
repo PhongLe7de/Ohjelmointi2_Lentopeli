@@ -20,18 +20,22 @@ var layer = L.marker([50,60]).addTo(map);
 layer.addTo(map);
 */
 
+players = [];
 form7.addEventListener("submit", formGetter);
 async function formGetter(e){
     e.preventDefault();
     const game1 = await fetch(`http://127.0.0.1:3000/start_game/${player1.value}/${player2.value}`);
     const game2 = await game1.json();
-    console.log("HERE", game2.gameid);
-    drawTheRoute(game2.gameid);
+    if(game2.gameid){
+        players.push([game2.player1, game2.player2]);
+        console.log(players);
+        console.log("HERE", game2.gameid);
+        drawTheRoute(game2.gameid);
+    }
+    else{
+        alert("Be more original, dumbass")
+    }
 }
-
-
-//let formi = formGetter();
-//console.log(formi);
 async function drawTheRoute(gameid){
     const route1 = await fetch(`http://127.0.0.1:3000/gameboard/${gameid}`);
     const route2 = await route1.json();
@@ -39,14 +43,19 @@ async function drawTheRoute(gameid){
     for(i of route2){
         cordinates.push([i.latitude_deg, i.longitude_deg]);
     }
-    L.polyline(cordinates, {color: "rgb(100,100,100)"}).addTo(map);
+    L.polyline(cordinates, {color: "rgb(100,100,250)"}).addTo(map);
     for(let place of cordinates){
         //L.marker(place, {icon: L.icon({iconUrl: "jotaro.jpg", iconSize: [100,100]}), opacity: 100}).addTo(map);
-        L.marker(place).addTo(map);
+        //L.marker(place).addTo(map);
     }
 }
 //drawTheRoute();
-
+let xx = [{id : 7}, {id : 8}];
+for(let i in xx){
+    if(i.ident=8){
+        let cordinates = [i.latitude_ded, i.longitude_deg];
+    }
+}
 
 L.geoJson(continentAF, {style: {color:"rgb(200,0,0)"}}).addTo(map);
 L.geoJson(continentAN, {style: {color:"rgb(0,0,256)"}}).addTo(map);
