@@ -1,6 +1,6 @@
 const map = L.map('map').setView([20, 0], 1);
-let player1 = document.querySelector("#player-1-name");
-let player2 = document.querySelector("#player-2-name");
+let player1html = document.querySelector("#player-1-name");
+let player2html = document.querySelector("#player-2-name");
 let form7 = document.querySelector("#form7");
 //console.log(player1, player1.value)
 
@@ -20,27 +20,52 @@ var layer = L.marker([50,60]).addTo(map);
 layer.addTo(map);
 */
 
-players = [];
+class Player{
+    constructor(name, icao, gameid) {
+    this.name = name;
+    this.icao = icao;
+    this.gameid = gameid;
+    this.cordinates = [78.246101379395, 15.465600013733];
+    this.playerMarker = L.marker(this.cordinates);
+  }
+  cordinateFinder(){
+    for(let i of gameRoute){
+        if(i.ident == this.icao){
+            this.cordinates = [i.latitude_deg, i.longitude_deg];
+        }
+    }
+  }
+  moveMarker(){
+    this.playerMarker._latlng.lat = this.cordinates[0];
+    this.playerMarker._latlng.lon = this.cordinates[1];
+    this.playerMarker.addTo(map);
+}
+}
+
+let gameRoute;
+
 form7.addEventListener("submit", formGetter);
 async function formGetter(e){
     e.preventDefault();
-    const game1 = await fetch(`http://127.0.0.1:3000/start_game/${player1.value}/${player2.value}`);
+    const game1 = await fetch(`http://127.0.0.1:3000/start_game/${player1html.value}/${player2html.value}`);
     const game2 = await game1.json();
+
     if(game2.gameid){
-        players.push([game2.player1, game2.player2]);
-        console.log(players);
-        console.log("HERE", game2.gameid);
-        drawTheRoute(game2.gameid);
+        const route1 = await fetch(`http://127.0.0.1:3000/gameboard/${game2.gameid}`);
+        gameRoute = await route1.json();
+        const player1 = new Player(game2.player1, "ENSB", game2.gameid);
+        const player2 = new Player(game2.player2, "ENSB", game2.gameid);
+        drawTheRoute();
     }
     else{
         alert("Be more original, dumbass")
     }
 }
-async function drawTheRoute(gameid){
-    const route1 = await fetch(`http://127.0.0.1:3000/gameboard/${gameid}`);
-    const route2 = await route1.json();
+async function drawTheRoute(){
+
+    //console.log(gameRoute);
     let cordinates = [];
-    for(i of route2){
+    for(i of gameRoute){
         cordinates.push([i.latitude_deg, i.longitude_deg]);
     }
     L.polyline(cordinates, {color: "rgb(100,100,250)"}).addTo(map);
@@ -49,13 +74,9 @@ async function drawTheRoute(gameid){
         //L.marker(place).addTo(map);
     }
 }
-//drawTheRoute();
-let xx = [{id : 7}, {id : 8}];
-for(let i in xx){
-    if(i.ident=8){
-        let cordinates = [i.latitude_ded, i.longitude_deg];
-    }
-}
+
+
+
 
 L.geoJson(continentAF, {style: {color:"rgb(200,0,0)"}}).addTo(map);
 L.geoJson(continentAN, {style: {color:"rgb(0,0,256)"}}).addTo(map);

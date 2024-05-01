@@ -118,13 +118,6 @@ def get_gameboard(id):
         return {"Error": "Invalid parameters", "Status": 400}
 
 
-@app.route('/playerlocation/<player_name>')
-def player_location(player_name):
-    sql = f"SELECT player_name, location from game WHERE player_name='{player_name}'"
-    cursor = database.connection.cursor(dictionary=True)
-    cursor.execute(sql)
-    result = cursor.fetchone()
-    return result #Tämän tulos {'location':'ICAO'}
 
 if __name__ == "__main__":
     app.run(use_reloader=True, host='127.0.0.1', port=3000)
