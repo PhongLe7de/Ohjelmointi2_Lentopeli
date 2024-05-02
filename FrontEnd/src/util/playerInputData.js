@@ -4,6 +4,7 @@
 const inputPlayerElement = document.getElementsByClassName('input-player')
 const playerNameSubmitBtn = inputPlayerElement[0].querySelector('input[type=submit]')
 
+
 // let player1Name
 // let player2Name
 // player01.addEventListener('change',(e)=>{
@@ -18,8 +19,8 @@ const playerNameSubmitBtn = inputPlayerElement[0].querySelector('input[type=subm
 let gameboardArraywait = []
 
 const playerName1 = {
-    player1_name: '1234526728921',
-    player2_name: '1987625423221'
+    player1_name: '123452116728921',
+    player2_name: '198762115423221'
 }
 
 
@@ -27,6 +28,7 @@ const URL_UPDATE_PLAYERNAME = 'http://localhost:3000/start_game/'; //waiting for
 const URL_GET_GAMEBOARD = 'http://localhost:3000/gameboard/'; //waiting for URL from BackEnd
 
 const handlePlayerInput = playerNameSubmitBtn.addEventListener('click', async(e) => {
+    console.log('a');
     e.preventDefault()
     const gameboardId = await inputPlayerData(URL_UPDATE_PLAYERNAME, playerName1)
     const gameboardArray = await getGameBoard(URL_GET_GAMEBOARD,gameboardId)

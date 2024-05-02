@@ -53,7 +53,7 @@ def airport_icao(icao):
 
 print(airport_icao("ENSB"))
 def game_board(gameid):
-    sql = f"SELECT * FROM gameboard WHERE id=2"
+    sql = f"SELECT * FROM gameboard WHERE id={gameid}"
     cursor = database.connection.cursor(dictionary=True)
     cursor.execute(sql)
     board = cursor.fetchone()
@@ -92,6 +92,8 @@ def start():
         print(response)
         player1_name=response['data']['player1_name']
         player2_name=response['data']['player2_name']
+        print(player1_name)
+        print(player2_name)
 
         player1_check = check_player(player1_name)
         player2_check = check_player(player2_name)
