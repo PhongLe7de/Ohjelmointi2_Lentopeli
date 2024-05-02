@@ -84,7 +84,7 @@ def register_player(player_name, gameid):
     cursor.execute(sql_player_register)
     database.connection.commit()
 
-@app.route('/start_game/' ,methods=['POST'])
+@app.route('/start_game/' ,methods=['GET','POST'])
 @cross_origin(origin='*')
 def start():
     try:
@@ -119,7 +119,7 @@ def start():
     except:
         return {"Error": "Invalid parameters", "Status": 400}
 
-@app.route('/gameboard/', methods=['POST'])
+@app.route('/gameboard/', methods=['GET','POST'])
 def get_gameboard():
     try:
         response = request.json
