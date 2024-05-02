@@ -14,10 +14,15 @@ html, body {
     align-items: center;
     justify-content: center;
     padding: 1em;
-    background-image: url("../kansii/kansi_VALMIS.jpg");
+    background-image: url("../kansii/start_game_title_screen_medium_quality.png");
     background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
+}
+
+.title {
+    width: 25%;
+    padding-top: 0.5em;
 }
 
 #start-game {
@@ -29,6 +34,45 @@ html, body {
 
 #start-game a {
     text-decoration: none;
+}
+
+
+#start-game {
+    margin-top: 2em;
+    border: unset;
+    padding: 1em;
+    width: 5%;
+}
+
+.input-player {
+    width: 23%;
+}
+
+h1 {
+    color: white;
+}
+
+input#player-1-name, input#player-2-name {
+    width: 100%;
+    padding-top: 0.9em;
+    padding-bottom: 0.9em;
+    border: none;
+    border-radius: 20px;
+    text-align: center;
+    color: #111111;
+}
+
+a input {
+    background-color: #04AA6D;
+    border-radius: 20px;
+    border: unset;
+    padding: 1em;
+    color: white;
+    width: 100%;
+}
+
+a input:hover {
+    background-color: #333;
 }
 
 .arrow {
@@ -70,7 +114,7 @@ html, body {
     box-shadow: 5px 5px 5px lightgray;
 }
 
-img {
+#passport-1 img, #passport-2 img{
     width: 90%;
     transform: rotate(340deg);
     padding: 0.5rem;
@@ -124,7 +168,7 @@ li {
   float: left;
 }
 
-li {
+li a {
   display: block;
   color: white;
   text-align: center;
@@ -134,6 +178,10 @@ li {
 
 li:hover {
   background-color: #111;
+}
+
+.active {
+  background-color: orange;
 }
 
 #map {
