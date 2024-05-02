@@ -7,18 +7,6 @@ const playerNameSubmitBtn = inputPlayerElement[0].querySelector('input[type=subm
 const URL_UPDATE_PLAYERNAME = 'http://localhost:3000/start_game/'; //waiting for URL from BackEnd
 const URL_GET_GAMEBOARD = 'http://localhost:3000/gameboard/'; //waiting for URL from BackEnd
 
-let playerName1
-let playerName2
-
-// const handlePlayerInput = playerNameSubmitBtn.addEventListener('click', async(e) => {
-//     const playerNameList= {
-//         player1_name: player01.value,
-//         player2_name: player02.value
-//     }
-//     e.preventDefault()
-//     const gameboardId = await inputPlayerData(URL_UPDATE_PLAYERNAME, playerNameList)
-//     const gameboardArray = await getGameBoard(URL_GET_GAMEBOARD,gameboardId)
-// })
 
 const inputPlayerData = async (URL, data) => {
     console.log(data);
@@ -26,7 +14,7 @@ const inputPlayerData = async (URL, data) => {
         const response = await fetch(URL, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({ data })
         })
@@ -34,7 +22,7 @@ const inputPlayerData = async (URL, data) => {
             const result = await response.json()
             const gameId = result.gameid
             console.log(result);
-            return gameId
+            return result
         } else {
             console.log('Fetch API FAIL')
         } 
@@ -48,7 +36,7 @@ const getGameBoard = async (URL, id) => {
         const response = await fetch(URL, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({ id })
         })

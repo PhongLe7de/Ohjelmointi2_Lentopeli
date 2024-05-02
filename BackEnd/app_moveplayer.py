@@ -1,4 +1,6 @@
 
+from app_card import co_card, surprise_card
+from app_gameboard_Phong import check_player, game_board, initialize, register_player
 import database
 from flask import Flask, Response, request
 import database
@@ -144,36 +146,34 @@ class Player:
         updated_score = cursor.fetchone()
         return updated_score #Tämä return { "score": 60 }
 
-
-
 @app.route('/move_player/', methods=['POST'])
 @cross_origin(origin='*')
-
 def change_location():
-    respone = request.json
-    print(respone)
+    print('ok')
+    response = request.json
+    print(response )
+    player_name = response['data']['currentPlayer']
+    dice = response['data']['value']
     try:
         app_player = Player(player_name)
         result = app_player.move_player(dice)
-        jsonresult = json.dumps(result)
-        return Response(response=jsonresult, mimetype="application/json")
+        print(result)
+        return result
     except:
         return {"Error": "Invalid parameters", "Status": 400}
 
-
-    # @app.route('/move_player/', methods=['OPTIONS'])
-    # @cross_origin(origin='*')
-    # def option():
-    #     # Nhận dữ liệu từ yêu cầu PATCH
-    #     return 'ok'
-
-@app.route('/effect/<player_name>/')
-def player_effect(player_name):
+@app.route('/effect/', methods=['POST'])
+@cross_origin(origin='*')
+def player_effect():
     try:
+        response = request.json
+        player_name = response['data']['currentPlayer']
+        print(player_name)
         app_player = Player(player_name)
+        print(app_player)
         result = app_player.get_effect()
-        jsonresult = json.dumps(result)
-        return Response(response=jsonresult, mimetype="application/json")
+        
+        return result
     except:
         return {"Error": "Invalid parameters", "Status": 400}
 
@@ -187,17 +187,6 @@ def player_effect_update(player_name, effect):
     except:
         return {"Error": "Invalid parameters", "Status": 400}
 
-
-@app.route('/move_player/<player_name>')
-def move_player(player_name):
-    try:
-        result = move_player(player_name)
-        return result
-    except:
-        return {"Error": "Invalid parameters", "Status": 400}
-
-if __name__ == "__main__":
-    app.run(use_reloader=True, host='127.0.0.1', port=3000)
 
 
 
@@ -221,6 +210,77 @@ def player_score_update(player_name, points):
     except:
         return {"Error": "Invalid parameters", "Status": 400}
 
+@app.route('/start_game/' ,methods=['POST'])
+@cross_origin(origin='*')
+def start():
+    try:
+        response = request.json
+        player1_name=response['data']['player1_name']
+        player2_name=response['data']['player2_name']
+
+        player1_check = check_player(player1_name)
+        player2_check = check_player(player2_name)
+
+        print(player1_check, player2_check)
+        if player1_check:
+            if player2_check:
+                return {"status": "error", "message": "Molemmat pelaajanimet varattuja"}
+            else:
+                return {"status": "error", "message": f"Pelaajanimi {player1_name} on varattu"}
+        elif player2_check:
+            if player1_check:
+                return {"status": "error", "message": "Molemmat pelaajanimet varattuja"}
+            else:
+                return {"status": "error", "message": f"Pelaajanimi {player2_name} on varattu"}
+        else:
+            gameid = initialize()
+            register_player(player1_name, gameid)
+            register_player(player2_name, gameid)
+
+            return {"gameid": f'{gameid}', "player1": f'{player1_name}', "player2": f'{player2_name}'}
+
+    except:
+        return {"Error": "Invalid parameters", "Status": 400}
+
+@app.route('/gameboard/', methods=['POST'])
+@cross_origin(origin='*')
+
+def get_gameboard():
+    try:
+        response = request.json
+        print(response)
+        id = response['id']
+        result = game_board(id)
+        print(result)
+        return result
+    except:
+        return {"Error": "Invalid parameters", "Status": 400}
+    
+@app.route('/get_co_card')
+@cross_origin(origin='*')
+
+def player_co_card():
+    try:
+        co = co_card()
+        jsonresult = json.dumps(co)
+        return Response(response=jsonresult, mimetype="application/json")
+    except:
+        return {"Error": "Invalid parameters", "Status": 400}
+
+@app.route('/get_surprise_card')
+@cross_origin(origin='*')
+
+def player_surprise_card():
+    try:
+        surprise = surprise_card()
+        jsonresult = json.dumps(surprise)
+        return Response(response=jsonresult, mimetype="application/json")
+    except:
+        return {"Error": "Invalid parameters", "Status": 400}
+
 
 if __name__ == "__main__":
     app.run(use_reloader=True, host='127.0.0.1', port=3000)
+
+if __name__ == "__main__":
+    app.run(use_reloader=True,host='127.0.0.1', port=3000)

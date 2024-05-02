@@ -84,52 +84,52 @@ def register_player(player_name, gameid):
     cursor.execute(sql_player_register)
     database.connection.commit()
 
-@app.route('/start_game/' ,methods=['GET','POST'])
-@cross_origin(origin='*')
-def start():
-    try:
-        response = request.json
-        print(response)
-        player1_name=response['data']['player1_name']
-        player2_name=response['data']['player2_name']
-        print(player1_name)
-        print(player2_name)
+# @app.route('/start_game/' ,methods=['POST'])
+# # @cross_origin(origin='*')
+# def start():
+#     try:
+#         response = request.json
+#         print(response)
+#         player1_name=response['data']['player1_name']
+#         player2_name=response['data']['player2_name']
+#         print(player1_name)
+#         print(player2_name)
 
-        player1_check = check_player(player1_name)
-        player2_check = check_player(player2_name)
+#         player1_check = check_player(player1_name)
+#         player2_check = check_player(player2_name)
 
-        print(player1_check, player2_check)
-        if player1_check:
-            if player2_check:
-                return {"status": "error", "message": "Molemmat pelaajanimet varattuja"}
-            else:
-                return {"status": "error", "message": f"Pelaajanimi {player1_name} on varattu"}
-        elif player2_check:
-            if player1_check:
-                return {"status": "error", "message": "Molemmat pelaajanimet varattuja"}
-            else:
-                return {"status": "error", "message": f"Pelaajanimi {player2_name} on varattu"}
-        else:
-            gameid = initialize()
-            register_player(player1_name, gameid)
-            register_player(player2_name, gameid)
+#         print(player1_check, player2_check)
+#         if player1_check:
+#             if player2_check:
+#                 return {"status": "error", "message": "Molemmat pelaajanimet varattuja"}
+#             else:
+#                 return {"status": "error", "message": f"Pelaajanimi {player1_name} on varattu"}
+#         elif player2_check:
+#             if player1_check:
+#                 return {"status": "error", "message": "Molemmat pelaajanimet varattuja"}
+#             else:
+#                 return {"status": "error", "message": f"Pelaajanimi {player2_name} on varattu"}
+#         else:
+#             gameid = initialize()
+#             register_player(player1_name, gameid)
+#             register_player(player2_name, gameid)
 
-            return {"gameid": f'{gameid}', "player1": f'{player1_name}', "player2": f'{player2_name}'}
+#             return {"gameid": f'{gameid}', "player1": f'{player1_name}', "player2": f'{player2_name}'}
 
-    except:
-        return {"Error": "Invalid parameters", "Status": 400}
+#     except:
+#         return {"Error": "Invalid parameters", "Status": 400}
 
-@app.route('/gameboard/', methods=['GET','POST'])
-def get_gameboard():
-    try:
-        response = request.json
-        print(response)
-        id = response['id']
-        result = game_board(id)
-        print(result)
-        return result
-    except:
-        return {"Error": "Invalid parameters", "Status": 400}
+# @app.route('/gameboard/', methods=['POST'])
+# def get_gameboard():
+#     try:
+#         response = request.json
+#         print(response)
+#         id = response['id']
+#         result = game_board(id)
+#         print(result)
+#         return result
+#     except:
+#         return {"Error": "Invalid parameters", "Status": 400}
 
 if __name__ == "__main__":
     app.run(use_reloader=True, host='127.0.0.1', port=3000)

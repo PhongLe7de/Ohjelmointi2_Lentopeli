@@ -201,17 +201,20 @@ footer {
 }
 
 #modal-dice{
-    position: relative;
+    position: fixed;
     z-index: 709;
-    top: -700px;
+    top: 200px;
+    right: 0;
     opacity: 1;
-    width: 100%;
+    width: 500px;
     height: 500px;
-    justify-content: center;
-    align-items: center;
+    justify-content: right;
+    
 }
 #modal-dice-container{
+    
     display: flex;
+    left: 1000px;
     flex-direction: column;
     width: 500px;
     height: 400px;
