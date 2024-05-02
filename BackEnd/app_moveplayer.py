@@ -1,8 +1,8 @@
 
 import database
-from flask import Flask, Response
+from flask import Flask, Response, request
 import database
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 import json
 
 app = Flask(__name__)
@@ -145,7 +145,10 @@ class Player:
         return updated_score #Tämä return { "score": 60 }
 
 
+
 @app.route('/move_player/<player_name>/<int:dice>')
+@cross_origin(origin='*')
+
 def change_location(player_name, dice):
     try:
         app_player = Player(player_name)
@@ -154,6 +157,13 @@ def change_location(player_name, dice):
         return Response(response=jsonresult, mimetype="application/json")
     except:
         return {"Error": "Invalid parameters", "Status": 400}
+
+
+    # @app.route('/move_player/', methods=['OPTIONS'])
+    # @cross_origin(origin='*')
+    # def option():
+    #     # Nhận dữ liệu từ yêu cầu PATCH
+    #     return 'ok'
 
 @app.route('/effect/<player_name>/')
 def player_effect(player_name):
