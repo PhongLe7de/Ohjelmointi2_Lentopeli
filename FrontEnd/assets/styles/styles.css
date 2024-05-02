@@ -211,10 +211,11 @@ footer {
     justify-content: right;
     
 }
+.player-dice-rolling{
+    color: #c91e1e;
+}
 #modal-dice-container{
-    
     display: flex;
-    left: 1000px;
     flex-direction: column;
     width: 500px;
     height: 400px;

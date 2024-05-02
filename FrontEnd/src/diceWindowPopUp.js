@@ -1,4 +1,4 @@
-const player = 2
+
 const handleShowDicePopUp = () =>{  
   const checkClass = getDicePopUpElement.classList
   if (checkClass[0] === 'open'){
@@ -13,7 +13,5 @@ const handleShowDicePopUp = () =>{
 const getDiceBtn = document.querySelector('.btn-dice')
 getDiceBtn.addEventListener('click',handleShowDicePopUp)
 
-const getPlayernameElement = document.querySelector('.player-dice-rolling')
-getPlayernameElement.innerHTML = `${player}`
 
 
