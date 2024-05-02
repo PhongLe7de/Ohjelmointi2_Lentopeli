@@ -13,10 +13,10 @@ const fetchAPI = async () => {
             console.log(result);
         } else { 
             console.log('Fetch API FAIL')
-        }
+        }å
     } catch (error) {
         console.error(error);
     }
 } 
-fetchAPI()
+// fetchAPI()
 
