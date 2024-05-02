@@ -6,7 +6,7 @@ const fetchAPI = async () => {
         const response = await fetch(URL_API, {
             method: 'GET'
         })
-        console.log(response);
+        //console.log(response);
         if (response.ok) {
             console.log('b');
             const result = await response.json()
