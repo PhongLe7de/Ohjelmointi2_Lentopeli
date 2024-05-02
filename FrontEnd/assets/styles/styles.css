@@ -202,8 +202,8 @@ footer {
 
 #modal-dice{
     position: relative;
-    z-index: 999;
-    top: -900px;
+    z-index: 709;
+    top: -700px;
     opacity: 1;
     width: 100%;
     height: 500px;

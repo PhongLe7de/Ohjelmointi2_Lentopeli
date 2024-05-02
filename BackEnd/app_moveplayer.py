@@ -146,10 +146,12 @@ class Player:
 
 
 
-@app.route('/move_player/<player_name>/<int:dice>')
+@app.route('/move_player/', methods=['POST'])
 @cross_origin(origin='*')
 
-def change_location(player_name, dice):
+def change_location():
+    respone = request.json
+    print(respone)
     try:
         app_player = Player(player_name)
         result = app_player.move_player(dice)

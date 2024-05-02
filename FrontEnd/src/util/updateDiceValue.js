@@ -29,7 +29,7 @@ const handleDiceRolling = (player) => {
       player: playerWhoPlay,
       value: randomDiceValue
     }
-    const URL = `http://localhost:3000/start_game/`; 
+    const URL = `http://localhost:3000/move_player/`; 
     updateData(URL, player, data)
   } else{
     console.log('window is not open');
