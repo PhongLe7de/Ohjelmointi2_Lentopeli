@@ -14,7 +14,7 @@ btnSubmit.addEventListener('click',(e)=>{
 console.log(playerName);
 
 const getDicePopUpElement = document.getElementById('modal-dice')
-const player = 2;
+const playerWhoPlay = 2;
 const handleDiceRolling = (player) => {
   const checkClass = getDicePopUpElement.classList
   if (checkClass[0] === 'open'){
@@ -26,9 +26,10 @@ const handleDiceRolling = (player) => {
     getDiceImgElement.src = `assets/img/dice/${randomDiceImg}`
 
     data = {
+      player: playerWhoPlay,
       value: randomDiceValue
     }
-    // const URL = `http://localhost:3000/start_game/`; 
+    const URL = `http://localhost:3000/start_game/`; 
     updateData(URL, player, data)
   } else{
     console.log('window is not open');

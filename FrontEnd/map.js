@@ -44,71 +44,84 @@ class Player {
 
 let gameRoute;
 
-form7.addEventListener("submit", formGetter);
-async function formGetter(e) {
-  e.preventDefault();
-  const game1 = await fetch(`http://127.0.0.1:3000/start_game/`);
-  try {
-    const response = await fetch(`http://127.0.0.1:3000/start_game/`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (response.ok) {
-      const result = await response.json();
-      const gameId = result.gameid;
-      console.log(result);
-      return gameId;
-    } else {
-      console.log("Fetch API FAIL");
-    }
-  } catch (error) {
-    console.error(error);
-  }
-  const game2 = await game1.json();
-  player1_name = game2["data"]["player1_name"];
-  player2_name = game2["data"]["player2_name"];
+form7.addEventListener("submit",()=>{handlePlayerInput() });
+// function formGetter(e) {
+//   e.preventDefault();
 
-  if (game2.gameid) {
-    try {
-      const response = await fetch(`http://127.0.0.1:3000/gameboard/`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (response.ok) {
-        const result = await response.json();
-        console.log(result);
-        const player1 = new Player(game2.player1_name, "ENSB", game2.gameid);
-        const player2 = new Player(game2.player2_name, "ENSB", game2.gameid);
-        drawTheRoute();
-      } else {
-        console.log("Fetch API FAIL");
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    const handlePlayerInput = playerNameSubmitBtn.addEventListener('click', async(e) => {
+        const playerNameList= {
+            player1_name: player01.value,
+            player2_name: player02.value
+        }
+        e.preventDefault()
+        const gameboardId = await inputPlayerData(URL_UPDATE_PLAYERNAME, playerNameList)
+        const gameboardArray = await getGameBoard(URL_GET_GAMEBOARD,gameboardId)
+        console.log(gameboardArray);
 
-    const route1 = await fetch(`http://127.0.0.1:3000/gameboard/`);
-    gameRoute = await route1.json();
-  } else {
-    alert("Be more original, dumbass");
-  }
-}
-async function drawTheRoute() {
-  //console.log(gameRoute);
-  let cordinates = [];
-  for (i of gameRoute) {
-    cordinates.push([i.latitude_deg, i.longitude_deg]);
-  }
-  L.polyline(cordinates, { color: "rgb(100,100,250)" }).addTo(map);
-  for (let place of cordinates) {
-    //L.marker(place, {icon: L.icon({iconUrl: "jotaro.jpg", iconSize: [100,100]}), opacity: 100}).addTo(map);
-    //L.marker(place).addTo(map);
-  }
-}
+        drawTheRoute(gameboardArray)
+    })
+//   try {
+//     const response = await fetch(`http://127.0.0.1:3000/start_game/`, {
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+//     if (response.ok) {
+//       const result = await response.json();
+//       const gameId = result.gameid;
+//       console.log(result);
+//       return gameId;
+//     } else {
+//       console.log("Fetch API FAIL");
+//     }
+//   } catch (error) {
+//     console.error(error);
+//   }
+//   const game2 = await game1.json();
+//   player1_name = game2["data"]["player1_name"];
+//   player2_name = game2["data"]["player2_name"];
+
+//   if (game2.gameid) {
+//     try {
+//       const response = await fetch(`http://127.0.0.1:3000/gameboard/`, {
+//         method: "GET",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//       });
+//       if (response.ok) {
+//         const result = await response.json();
+//         console.log(result);
+//         const player1 = new Player(game2.player1_name, "ENSB", game2.gameid);
+//         const player2 = new Player(game2.player2_name, "ENSB", game2.gameid);
+//         drawTheRoute();
+//       } else {
+//         console.log("Fetch API FAIL");
+//       }
+//     } catch (error) {
+//       console.error(error);
+//     }
+
+//     const route1 = await fetch(`http://127.0.0.1:3000/gameboard/`);
+//     gameRoute = await route1.json();
+//   } else {
+//     alert("Be more original, dumbass");
+//   }
+// }
+
+// async function drawTheRoute() {
+//   //console.log(gameRoute);
+//   let cordinates = [];
+//   for (i of gameboardArray) {
+//     cordinates.push([i.latitude_deg, i.longitude_deg]);
+//   }
+//   L.polyline(cordinates, { color: "rgb(100,100,250)" }).addTo(map);
+//   for (let place of cordinates) {
+//     //L.marker(place, {icon: L.icon({iconUrl: "jotaro.jpg", iconSize: [100,100]}), opacity: 100}).addTo(map);
+//     //L.marker(place).addTo(map);
+//   }
+// }
 
 L.geoJson(continentAF, { style: { color: "rgb(200,0,0)" } }).addTo(map);
 L.geoJson(continentAN, { style: { color: "rgb(0,0,256)" } }).addTo(map);
@@ -123,3 +136,16 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
     '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
+
+async function drawTheRoute(gameboardArray) {
+    //console.log(gameRoute);
+    let cordinates = [];
+    for (i of gameboardArray) {
+    cordinates.push([i.latitude_deg, i.longitude_deg]);
+    }
+    L.polyline(cordinates, { color: "rgb(100,100,250)" }).addTo(map);
+    for (let place of cordinates) {
+    //L.marker(place, {icon: L.icon({iconUrl: "jotaro.jpg", iconSize: [100,100]}), opacity: 100}).addTo(map);
+    //L.marker(place).addTo(map);
+    }
+}

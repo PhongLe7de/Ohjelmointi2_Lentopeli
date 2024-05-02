@@ -10,15 +10,15 @@ const URL_GET_GAMEBOARD = 'http://localhost:3000/gameboard/'; //waiting for URL 
 let playerName1
 let playerName2
 
-const handlePlayerInput = playerNameSubmitBtn.addEventListener('click', async(e) => {
-    const playerNameList= {
-        player1_name: player01.value,
-        player2_name: player02.value
-    }
-    e.preventDefault()
-    const gameboardId = await inputPlayerData(URL_UPDATE_PLAYERNAME, playerNameList)
-    const gameboardArray = await getGameBoard(URL_GET_GAMEBOARD,gameboardId)
-})
+// const handlePlayerInput = playerNameSubmitBtn.addEventListener('click', async(e) => {
+//     const playerNameList= {
+//         player1_name: player01.value,
+//         player2_name: player02.value
+//     }
+//     e.preventDefault()
+//     const gameboardId = await inputPlayerData(URL_UPDATE_PLAYERNAME, playerNameList)
+//     const gameboardArray = await getGameBoard(URL_GET_GAMEBOARD,gameboardId)
+// })
 
 const inputPlayerData = async (URL, data) => {
     console.log(data);
@@ -54,7 +54,7 @@ const getGameBoard = async (URL, id) => {
         })
         if (response.ok) {
             const result = await response.json()
-            console.log(result);
+            return result
         } else {
             console.log('Fetch API FAIL')
         } 
@@ -62,6 +62,7 @@ const getGameBoard = async (URL, id) => {
         console.error(error);
     }
 }
+const exampleddss= ()=>{console.log('sdsdsdsa');}
 
 
 

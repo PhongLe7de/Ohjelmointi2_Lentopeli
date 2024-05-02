@@ -147,6 +147,8 @@ class Player:
 
 
 @app.route('/move_player/<player_name>/<int:dice>')
+@cross_origin(origin='*')
+
 def change_location(player_name, dice):
     try:
         app_player = Player(player_name)
@@ -155,16 +157,7 @@ def change_location(player_name, dice):
         return Response(response=jsonresult, mimetype="application/json")
     except:
         return {"Error": "Invalid parameters", "Status": 400}
-@app.route('/dicevalue/' ,methods=['POST','OPTIONS'])
-@cross_origin(origin='*')
-def update_data():
-    # Nhận dữ liệu từ yêu cầu PATCH
-    try:
-        data = request.json
-        print(data)
-        return data
-    except:
-        return {"Error": "Invalid parameters", "Status": 400}
+
 
     # @app.route('/move_player/', methods=['OPTIONS'])
     # @cross_origin(origin='*')
