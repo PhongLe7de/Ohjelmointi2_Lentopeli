@@ -16,7 +16,7 @@ stampList = {
     player1: ['EU', 'AF', 'SA'],
     player2: ['EU', 'AF', 'NA', 'SA']
 }
-console.log(stampList);
+//console.log(stampList);
 const mainlandStampsP1= document.getElementById('passport-1')
 stampList.player1.forEach(mainland => {
     const getmainland = mainlandStampsP1.getElementsByClassName(`${mainland}-stamp`)

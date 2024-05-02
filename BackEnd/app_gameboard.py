@@ -52,7 +52,7 @@ def airport_icao(icao):
 
 print(airport_icao("ENSB"))
 def game_board(gameid):
-    sql = f"SELECT * FROM gameboard WHERE id=2"
+    sql = f"SELECT * FROM gameboard WHERE id={gameid}"
     cursor = database.connection.cursor(dictionary=True)
     cursor.execute(sql)
     board = cursor.fetchone()
@@ -116,6 +116,8 @@ def get_gameboard(id):
         return result
     except:
         return {"Error": "Invalid parameters", "Status": 400}
+
+
 
 if __name__ == "__main__":
     app.run(use_reloader=True, host='127.0.0.1', port=3000)
