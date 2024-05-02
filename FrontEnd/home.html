@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>Lentopeli</title>
     <link href="assets/styles/styles.css" rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Lentopeli" content="Ohjelmisto2- Pelisivu.">
     <script defer src="continents/af.js"></script>
     <script defer src="continents/an.js"></script>
     <script defer src="continents/as.js"></script>
@@ -33,12 +34,14 @@
     <nav class="navigation">
     <p class="logo">ÖKYRIKAS JA RUTIKUIVA</p>
     <ul>
-        <li>Intro</li>
-        <li>Tallennetut pelit</li>
+        <li><a class="active" href="home.html">Peli</a></li>
+        <li><a href="intro.html">Intro</a></li>
+        <li><a href="tietokannat.html">Pelatut pelit</a></li>
     </ul>
 </nav>
 </header>
 <div class="new">
+    <img class="title" src="assets/kansii/logo.png" alt="game-title">
     <div class="input-player">
         <h1>Uusi Peli</h1>
         <form id="form7">
@@ -48,13 +51,9 @@
             <label for="player-2-name">Pelaaja 2:</label><br>
             <input type="text" id="player-2-name" name="player-2-name"><br><br>
 
-            <input type="submit" value="Tallenna pelaajat">
+            <a href="#game"><input type="submit" value="Tallenna pelaajat"></a>
         </form>
     </div>
-        <div id="start-game">
-            <p>Aloita peli</p>
-            <a href="#game"><i class="arrow down"></i></a>
-        </div>
 </div>
 <div class="container" id="game">
   <div id="btn-dice-container">
