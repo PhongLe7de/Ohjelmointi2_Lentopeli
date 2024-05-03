@@ -166,6 +166,7 @@ const handleDiceRolling = async (player) => {
             data = {
               currentPlayer: listPlayer[1],
               value: 1
+
             }
             skipTurns = await handleSkipTurns(data)
             console.log(skipTurns)
