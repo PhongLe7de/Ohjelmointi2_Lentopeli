@@ -75,17 +75,6 @@ a input:hover {
     background-color: #333;
 }
 
-.arrow {
-  border: solid black;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 3px;
-}
-
-.down {
-  transform: rotate(45deg);
-}
-
 .container {
     width: 100%;
     height: 100%;
@@ -94,6 +83,7 @@ a input:hover {
     justify-content: space-evenly;
     align-items: center;
     padding-top: 5em;
+    position: relative;
 }
 
 .player-boxes {
@@ -245,12 +235,12 @@ footer {
 
 #btn-dice-container{
     /* position: fixed; */
+    position: absolute;
     display: flex;
-    width: 100%;
+    width: 200px;
     height: 48px;
-    top: 100px;
-    padding-left: 20px;
-    align-items: center;
+    top: 16px;
+    left: 25px;
 }
 #btn-dice-section{
     /* position: fixed; */
@@ -258,6 +248,7 @@ footer {
     width: 150px;
     height: 48px;
     top: 100px;
+    left: 100px;
     justify-content: space-between;
     align-items: center;
 }
