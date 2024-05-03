@@ -303,10 +303,10 @@ const handleDiceRolling = async (player) => {
     console.log('1 after', player01Data.effect);
     console.log('2 after', player02Data.effect);
 
-    if(player01Data.mainland.length === 3){
+    if(player01Data.mainland.length === 6) {
       whoWins1();
     }
-    else if(player02Data.mainland.length === 3){
+    else if(player02Data.mainland.length === 6){
       whoWins2();
     }
 
