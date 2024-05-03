@@ -51,6 +51,10 @@ const handleDiceRolling = async (player) => {
       }
       const response = await handlePostData(data)
       console.log(response)
+      console.log(response.Player)
+      console.log(response.space)
+
+      movePlayerMarker(response.Player, response.space);
       const playerData = {
         icao: response['ident'],
         score: response['update_score']['score'],

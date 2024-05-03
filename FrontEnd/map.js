@@ -27,11 +27,12 @@ class Player {
 
 var player1Name;
 var player2Name;
-var player1Marker = L.marker([78.246101379395, 15.465600013733], {icon: L.icon({iconUrl: "red_plane_left.png", iconSize: [20,20]})}).addTo(map);
-var player2Marker = L.marker([78.246101379395, 15.465600013733], {icon: L.icon({iconUrl: "blue_plane_left.png", iconSize: [20,20]})}).addTo(map);
+var player1Marker = L.marker([78.246101379395, 15.465600013733], {icon: L.icon({iconUrl: "red_plane_left.png", iconSize: [50,50]})}).addTo(map);
+var player2Marker = L.marker([78.246101379395, 15.465600013733], {icon: L.icon({iconUrl: "blue_plane_right.png", iconSize: [50,50]})}).addTo(map);
 
 function movePlayerMarker(player, place){
     if(player == player1Name) {
+        console.log('test')
         player1Marker.setLatLng([place.latitude_deg, place.longitude_deg]);
     }
     else if(player == player2Name){
@@ -137,7 +138,7 @@ async function drawTheRoute(gameboardArray) {
     for (i of gameboardArray) {
     cordinates.push([i.latitude_deg, i.longitude_deg]);
     }
-    L.polyline(cordinates, { color: "rgb(100,100,250)" }).addTo(map);
+    L.polyline(cordinates, { color: "rgb(190,157,184,1)" }).addTo(map);
     for (let place of cordinates) {
     //L.marker(place, {icon: L.icon({iconUrl: "jotaro.jpg", iconSize: [100,100]}), opacity: 100}).addTo(map);
     //L.marker(place).addTo(map);
