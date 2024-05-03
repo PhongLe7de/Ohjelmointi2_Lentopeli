@@ -50,6 +50,7 @@ const handleDiceRolling = async (player) => {
         value: randomDiceValue
       }
       const response = await handlePostData(data)
+      console.log(response)
       const playerData = {
         score: response['update_score']['score'],
         effect: response['get_effect']['effect_skip_turns'],
@@ -110,8 +111,8 @@ const handleDiceRolling = async (player) => {
     waitP2.innerHTML = `${player02Data.effect}`
 
 
-    console.log('1 after', player01SkipTurns);
-    console.log('2 after', player02SkipTurns);
+    console.log('1 after', player01Data.effect);
+    console.log('2 after', player02Data.effect);
 
 
     currentPlayer = currentPlayer === 0 ? 1 : 0
