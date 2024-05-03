@@ -75,7 +75,6 @@ const handleDiceRolling = async (player) => {
             skipTurns = await handleSkipTurns(data)
             console.log(skipTurns)
             player02Data.effect += skipTurns['effect_skip_turns']
-            player02Data.effect = handleSkipTurns(data)['effect_skip_turns']
             // player02Data.effect++;
             break;
           case 2:
