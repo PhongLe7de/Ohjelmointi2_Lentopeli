@@ -2,23 +2,6 @@ const map = L.map("map").setView([20, 0], 1);
 let player1html = document.querySelector("#player-1-name");
 let player2html = document.querySelector("#player-2-name");
 let form7 = document.querySelector("#form7");
-//console.log(player1, player1.value)
-
-//L.marker([60, 20]).addTo(map).bindPopup("<b>The World!</b><br>Time has stopped!").openPopup();
-//L.marker([27, -82], {icon: L.icon({iconUrl: "jotaro.jpg", iconSize: [80, 80]})}).addTo(map);
-//L.circle([50, 20], {color: 'red', fillColor: '#f03', fillOpacity: 0.5,radius: 500}).addTo(map).bindPopup("pie");
-//L.polygon([[51.509, -0.08], [30, 50], [10, 0]], {color: "rgb(50,5,5)"}).addTo(map).bindPopup("Pony gone.");
-//L.polygon([[0, -50], [50, -50], [10, -60]], {color: "rgb(5,5,50)"}).addTo(map).bindPopup("Pony gone.");
-//map.on('click', (e)=>{L.popup().setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString()).openOn(map);});
-//L.marker([50,-50], {opacity: 1, zIndexOffset: 100, riseOnHover: true, riceOffSet:1000}).addTo(map);
-//L.marker([10,-50], {riseOnHover: true}).addTo(map);
-/*
-let adobe = L.marker([0,0],{transparent: true});
-adobe.addTo(map);
-
-var layer = L.marker([50,60]).addTo(map);
-layer.addTo(map);
-*/
 
 class Player {
   constructor(name, icao, gameid) {
@@ -45,19 +28,16 @@ class Player {
 let gameRoute;
 
 form7.addEventListener("submit",()=>{handlePlayerInput() });
-// function formGetter(e) {
-//   e.preventDefault();
-
     const handlePlayerInput = playerNameSubmitBtn.addEventListener('click', async(e) => {
         const playerNameList= {
             player1_name: player01.value,
             player2_name: player02.value
         }
         e.preventDefault()
+        document.getElementById('p1-name').innerHTML = `${playerNameList.player1_name}`
+        document.getElementById('p2-name').innerHTML = `${playerNameList.player2_name}`
         const gameboardId = await inputPlayerData(URL_UPDATE_PLAYERNAME, playerNameList)
-        const gameboardArray = await getGameBoard(URL_GET_GAMEBOARD,gameboardId)
-        console.log(gameboardArray);
-
+        const gameboardArray = await getGameBoard(URL_GET_GAMEBOARD,gameboardId.gameid)
         drawTheRoute(gameboardArray)
     })
 //   try {

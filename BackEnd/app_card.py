@@ -38,24 +38,24 @@ def co_card():
     #     "score": 50
     # }
 
-@app.route('/get_co_card')
-def player_co_card():
-    try:
-        co = co_card()
-        jsonresult = json.dumps(co)
-        return Response(response=jsonresult, mimetype="application/json")
-    except:
-        return {"Error": "Invalid parameters", "Status": 400}
+# @app.route('/get_co_card')
+# def player_co_card():
+#     try:
+#         co = co_card()
+#         jsonresult = json.dumps(co)
+#         return Response(response=jsonresult, mimetype="application/json")
+#     except:
+#         return {"Error": "Invalid parameters", "Status": 400}
 
-@app.route('/get_surprise_card')
-def player_surprise_card():
-    try:
-        surprise = surprise_card()
-        jsonresult = json.dumps(surprise)
-        return Response(response=jsonresult, mimetype="application/json")
-    except:
-        return {"Error": "Invalid parameters", "Status": 400}
+# @app.route('/get_surprise_card')
+# def player_surprise_card():
+#     try:
+#         surprise = surprise_card()
+#         jsonresult = json.dumps(surprise)
+#         return Response(response=jsonresult, mimetype="application/json")
+#     except:
+#         return {"Error": "Invalid parameters", "Status": 400}
 
 
-if __name__ == "__main__":
-    app.run(use_reloader=True, host='127.0.0.1', port=3000)
+# if __name__ == "__main__":
+#     app.run(use_reloader=True, host='127.0.0.1', port=3000)

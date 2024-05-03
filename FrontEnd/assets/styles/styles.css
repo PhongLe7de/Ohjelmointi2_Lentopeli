@@ -201,14 +201,18 @@ footer {
 }
 
 #modal-dice{
-    position: relative;
-    z-index: 999;
-    top: -900px;
+    position: fixed;
+    z-index: 709;
+    top: 200px;
+    right: 0;
     opacity: 1;
-    width: 100%;
+    width: 500px;
     height: 500px;
-    justify-content: center;
-    align-items: center;
+    justify-content: right;
+    
+}
+.player-dice-rolling{
+    color: #c91e1e;
 }
 #modal-dice-container{
     display: flex;
