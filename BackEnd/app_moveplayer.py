@@ -111,7 +111,13 @@ class Player:
                 player_index = self.game.board.index(space)
                 break
         if player_index is not None:
-            new_index = player_index + dice
+            if player_index <= 2:
+                if dice < 0:
+                    new_index = 0
+                else:
+                    new_index = player_index + dice
+            else:
+                new_index = player_index + dice
         elif player_index >= len(self.game.board):
             new_index = 43
         new_location = self.game.board[new_index]

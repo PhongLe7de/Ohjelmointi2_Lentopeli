@@ -93,11 +93,20 @@ def player_effect_update():
     try:
         response = request.json
         app_player = Player(response['data']['currentPlayer'])
-        result = app_player.effect_skip_turn_update(response['data']['value'])
-        print(result)
         effect = app_player.get_effect()
-        print(effect)
-        return effect
+        print(effect['effect_skip_turns'])
+        print("Hello")
+        print(response['data']['value'])
+        if effect['effect_skip_turns'] >= 0:
+            result = app_player.effect_skip_turn_update(response['data']['value'])
+            print(result)
+        elif effect['effect_skip_turns'] < 0:
+            result = app_player.effect_skip_turn_update(0)
+            print(f"result is {result}")
+        new_effect = app_player.get_effect()
+        print("Jotain")
+        print(new_effect)
+        return new_effect
     except:
         return {"Error": "Invalid parameters", "Status": 400}
 
