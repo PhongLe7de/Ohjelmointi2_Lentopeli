@@ -75,7 +75,6 @@ const handleDiceRolling = async (player) => {
             skipTurns = await handleSkipTurns(data)
             console.log(skipTurns)
             player02Data.effect += skipTurns['effect_skip_turns']
-            player02Data.effect = handleSkipTurns(data)['effect_skip_turns']
             // player02Data.effect++;
             break;
           case 2:
@@ -166,6 +165,7 @@ const handleDiceRolling = async (player) => {
             data = {
               currentPlayer: listPlayer[1],
               value: 1
+
             }
             skipTurns = await handleSkipTurns(data)
             console.log(skipTurns)
@@ -243,6 +243,9 @@ const handleDiceRolling = async (player) => {
       const getmainland = mainlandStampsP1.getElementsByClassName(`${item}-stamp`)
       if (getmainland) {
         getmainland[0].src = `assets/leimat/${item}_saavutettu.png`
+        if (getmainland[6]){
+          alert("WINNER")
+        }
       } else {
         console.log('mainland not found');
       }
