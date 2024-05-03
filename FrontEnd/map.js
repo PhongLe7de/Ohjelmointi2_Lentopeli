@@ -107,7 +107,7 @@ L.geoJson(continentAF, { style: { color: "rgb(200,0,0)" } }).addTo(map);
 L.geoJson(continentAN, { style: { color: "rgb(0,0,256)" } }).addTo(map);
 L.geoJson(continentAS, { style: { color: "rgb(100,0,100)" } }).addTo(map);
 L.geoJson(continentEU, { style: { color: "rgb(100,100,250)" } }).addTo(map);
-L.geoJson(continentNA, { style: { color: "rgb(150,150,0)" } }).addTo(map);
+L.geoJson(continentNA, { style: { color: "rgb(180, 180, 100)" } }).addTo(map);
 L.geoJson(continentOC, { style: { color: "rgb(250,150,50)" } }).addTo(map);
 L.geoJson(continentSA, { style: { color: "rgb(0,250,0)" } }).addTo(map);
 
