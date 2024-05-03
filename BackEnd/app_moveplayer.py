@@ -43,35 +43,6 @@ def player_space(player_name, ICAO):
         print(f"The value {ICAO} was not found in any of the columns.")
     return result
 
-def player_move(self, dice):
-    location = self.player_location()
-    space = self.player_space(location['location'])
-    current_index = game_spaces.index(space)
-    print(current_index)
-    if current_index is not None and current_index < 43:
-        new_index = current_index + dice
-        print(game_spaces[new_index])
-        new_location_sql = f"SELECT {game_spaces[new_index]} FROM gameboard WHERE id ='{self.gameid}'"
-        cursor = database.connection.cursor()
-        cursor.execute(new_location_sql)
-        result = cursor.fetchone()
-        print(result[0])
-        sql = f"UPDATE game SET location = '{result[0]}' WHERE player_name = '{self.name}'"
-        cursor = database.connection.cursor()
-        cursor.execute(sql)
-        database.connection.commit()
-        print("Tulos päivitetty")
-    else:
-        new_index = 43
-    return game_spaces[new_index]
-
-# @app.route('/player_location/<player_name>/')
-# def player_location(player_name):
-#     try:
-#         result = player_location(player_name)
-#         return result
-
-
 
 class Game:
     def __init__(self, gameid):
@@ -119,7 +90,7 @@ class Player:
             else:
                 new_index = player_index + dice
         elif player_index >= len(self.game.board):
-            new_index = 43
+            new_index = 44
         new_location = self.game.board[new_index]
         new_icao = list(new_location.values())[0]
         sql = f"UPDATE game SET location = '{new_icao}' WHERE player_name = '{self.player_name}'"
