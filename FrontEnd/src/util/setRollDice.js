@@ -32,10 +32,23 @@ const handleDiceRolling = async (player) => {
     console.log(listPlayer[currentPlayer]);
     console.log('start', playerSkipTurns);
     if (playerSkipTurns > 0) {
-
-      currentPlayer === 0
-        ? player01Data.effect--
-        : player02Data.effect--
+      if (currentPlayer === 0) {
+        data = {
+          currentPlayer: listPlayer[currentPlayer],
+          value: -1,
+        };
+        skipTurns = await handleSkipTurns(data);
+        console.log(skipTurns);
+        player01Data.effect = skipTurns['effect_skip_turns'];
+      } else {
+        data = {
+          currentPlayer: listPlayer[1],
+          value: 0,
+        };
+        skipTurns = await handleSkipTurns(data);
+        console.log(skipTurns);
+        player02Data.effect = skipTurns['effect_skip_turns'];
+      }
     }
     else {
       const randomDiceValue = Math.floor(Math.random() * 6 + 1);
@@ -73,13 +86,12 @@ const handleDiceRolling = async (player) => {
         switch (playerData.surprise_effect) {
           case 1:
             data = {
-              otherPlayer: listPlayer[1],
+              currentPlayer: listPlayer[1],
               value: 1
             }
             skipTurns = await handleSkipTurns(data)
             console.log(skipTurns)
-            player02Data.effect += skipTurns['effect_skip_turns']
-            player02Data.effect = handleSkipTurns(data)['effect_skip_turns']
+            player02Data.effect = skipTurns['effect_skip_turns']
             // player02Data.effect++;
             break;
           case 2:
@@ -89,7 +101,7 @@ const handleDiceRolling = async (player) => {
             }
             skipTurns = await handleSkipTurns(data)
             console.log(skipTurns)
-            player01Data.effect += skipTurns['effect_skip_turns']
+            player01Data.effect = skipTurns['effect_skip_turns']
             break;
           case 3:
             data = {
@@ -114,12 +126,12 @@ const handleDiceRolling = async (player) => {
         switch (playerData.co_effect) {
           case 1:
             data = {
-              otherPlayer: listPlayer[0],
+              currentPlayer: listPlayer[0],
               value: 1
             }
             skipTurns = await handleSkipTurns(data)
             console.log(skipTurns)
-            player02Data.effect += skipTurns['effect_skip_turns']
+            player02Data.effect = skipTurns['effect_skip_turns']
             break;
           case 2:
             data = {
@@ -128,7 +140,7 @@ const handleDiceRolling = async (player) => {
             }
             skipTurns = await handleSkipTurns(data)
             console.log(skipTurns)
-            player01Data.effect += skipTurns['effect_skip_turns']
+            player01Data.effect = skipTurns['effect_skip_turns']
             break;
           case 3:
             data = {
@@ -156,24 +168,26 @@ const handleDiceRolling = async (player) => {
         }
 
       } else {
+        console.log(playerData.surprise_effect)
         switch (playerData.surprise_effect) {
           case 1:
             data = {
-              otherPlayer: listPlayer[0],
+              currentPlayer: listPlayer[0],
               value: 1
             }
             skipTurns = await handleSkipTurns(data)
             console.log(skipTurns)
-            player01Data.effect += skipTurns['effect_skip_turns']
+            player01Data.effect = skipTurns['effect_skip_turns']
             break;
           case 2:
             data = {
               currentPlayer: listPlayer[1],
               value: 1
             }
+            console.log(listPlayer[1])
             skipTurns = await handleSkipTurns(data)
             console.log(skipTurns)
-            player02Data.effect += skipTurns['effect_skip_turns']
+            player02Data.effect = skipTurns['effect_skip_turns']
             break;
           case 3:
             data = {
@@ -182,6 +196,7 @@ const handleDiceRolling = async (player) => {
             }
             const back = await handlePostData(data)
             console.log(back)
+              //KORJAA TÄMÄ SAATANA
             break;
           case 4:
             data = {
@@ -198,12 +213,12 @@ const handleDiceRolling = async (player) => {
       switch (playerData.co_effect) {
         case 1:
           data = {
-            otherPlayer: listPlayer[0],
+            currentPlayer: listPlayer[0],
             value: 1
           }
           skipTurns = await handleSkipTurns(data)
           console.log(skipTurns)
-          player01Data.effect += skipTurns['effect_skip_turns']
+          player01Data.effect = skipTurns['effect_skip_turns']
           break;
         case 2:
           data = {
@@ -212,7 +227,7 @@ const handleDiceRolling = async (player) => {
           }
             skipTurns = await handleSkipTurns(data)
             console.log(skipTurns)
-            player02Data.effect += skipTurns['effect_skip_turns']
+            player02Data.effect = skipTurns['effect_skip_turns']
           break;
         case 3:
           data = {
@@ -247,6 +262,9 @@ const handleDiceRolling = async (player) => {
       const getmainland = mainlandStampsP1.getElementsByClassName(`${item}-stamp`)
       if (getmainland) {
         getmainland[0].src = `assets/leimat/${item}_saavutettu.png`
+        if (getmainland[6]){
+          alert("WINNER")
+        }
       } else {
         console.log('mainland not found');
       }
@@ -256,6 +274,9 @@ const handleDiceRolling = async (player) => {
       const getmainland = mainlandStampsP2.getElementsByClassName(`${item}-stamp`)
       if (getmainland) {
         getmainland[0].src = `assets/leimat/${item}_saavutettu.png`
+        if (getmainland[6]){
+          alert("WINNER")
+        }
       } else {
         console.log('mainland not found');
       }
