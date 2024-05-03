@@ -3,6 +3,7 @@ const getRollfeature = document.querySelector('.roll-feature')
 
 getRollfeature.addEventListener('click', () => { handleDiceRolling(currentPlayer) })
 let currentPlayer = 0;
+let skipTurns;
 
 let player01Data = {
   mainland: [],
@@ -53,7 +54,7 @@ const handleDiceRolling = async (player) => {
       const playerData = {
         icao: response['ident'],
         score: response['update_score']['score'],
-        co_effect: response['co_card_effect'],
+        co_effect: response['co_effect'],
         surprise_effect: response['surprise_effect'],
         // effect: response['final_effect_value']['effect_skip_turns'],
         mainland: response['space']['continent'],
@@ -67,10 +68,24 @@ const handleDiceRolling = async (player) => {
         player01Data.score = playerData.score
         switch (playerData.surprise_effect) {
           case 1:
-            player02Data.effect++;
+            data = {
+              otherPlayer: listPlayer[1],
+              value: 1
+            }
+            skipTurns = await handleSkipTurns(data)
+            console.log(skipTurns)
+            player02Data.effect += skipTurns['effect_skip_turns']
+            player02Data.effect = handleSkipTurns(data)['effect_skip_turns']
+            // player02Data.effect++;
             break;
           case 2:
-            player01Data.effect++;
+            data = {
+              currentPlayer: listPlayer[currentPlayer],
+              value: 1
+            }
+            skipTurns = await handleSkipTurns(data)
+            console.log(skipTurns)
+            player01Data.effect += skipTurns['effect_skip_turns']
             break;
           case 3:
             data = {
@@ -94,10 +109,22 @@ const handleDiceRolling = async (player) => {
         }
         switch (playerData.co_effect) {
           case 1:
-            player02Data.effect++;
+            data = {
+              otherPlayer: listPlayer[0],
+              value: 1
+            }
+            skipTurns = await handleSkipTurns(data)
+            console.log(skipTurns)
+            player02Data.effect += skipTurns['effect_skip_turns']
             break;
           case 2:
-            player01Data.effect++;
+            data = {
+              currentPlayer: listPlayer[currentPlayer],
+              value: 1
+            }
+            skipTurns = await handleSkipTurns(data)
+            console.log(skipTurns)
+            player01Data.effect += skipTurns['effect_skip_turns']
             break;
           case 3:
             data = {
@@ -128,19 +155,21 @@ const handleDiceRolling = async (player) => {
         switch (playerData.surprise_effect) {
           case 1:
             data = {
-              currentPlayer: listPlayer[currentPlayer],
+              otherPlayer: listPlayer[0],
               value: 1
             }
-            handleSkipTurns(data)
-            // player01Data.effect++;
+            skipTurns = await handleSkipTurns(data)
+            console.log(skipTurns)
+            player01Data.effect += skipTurns['effect_skip_turns']
             break;
           case 2:
             data = {
-              currentPlayer: listPlayer[currentPlayer],
+              currentPlayer: listPlayer[1],
               value: 1
             }
-            handleSkipTurns(data)
-            // player02Data.effect++;
+            skipTurns = await handleSkipTurns(data)
+            console.log(skipTurns)
+            player02Data.effect += skipTurns['effect_skip_turns']
             break;
           case 3:
             data = {
@@ -165,19 +194,21 @@ const handleDiceRolling = async (player) => {
       switch (playerData.co_effect) {
         case 1:
           data = {
-            currentPlayer: listPlayer[currentPlayer],
+            otherPlayer: listPlayer[0],
             value: 1
           }
-          handleSkipTurns(data)
-          // player01Data.effect++;
+          skipTurns = await handleSkipTurns(data)
+          console.log(skipTurns)
+          player01Data.effect += skipTurns['effect_skip_turns']
           break;
         case 2:
           data = {
-            currentPlayer: listPlayer[currentPlayer],
+            currentPlayer: listPlayer[1],
             value: 1
           }
-          handleSkipTurns(data)
-          // player02Data.effect++;
+            skipTurns = await handleSkipTurns(data)
+            console.log(skipTurns)
+            player02Data.effect += skipTurns['effect_skip_turns']
           break;
         case 3:
           data = {

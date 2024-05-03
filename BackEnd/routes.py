@@ -14,9 +14,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @app.route('/move_player/', methods=['POST'])
 @cross_origin(origin='*')
 def change_location():
-    print('ok')
     response = request.json
-    print(response)
     player_name = response['data']['currentPlayer']
     dice = response['data']['value']
     try:
@@ -90,13 +88,16 @@ def player_effect():
     except:
         return {"Error": "Invalid parameters", "Status": 400}
 
-@app.route('/effect_update/<player_name>/<int:effect>')
-def player_effect_update(player_name, effect):
+@app.route('/effect_update/', methods=['POST'])
+def player_effect_update():
     try:
-        app_player = Player(player_name)
-        result = app_player.effect_skip_turn_update(effect)
-        jsonresult = json.dumps(result)
-        return Response(response=jsonresult, mimetype="application/json")
+        response = request.json
+        app_player = Player(response['data']['currentPlayer'])
+        result = app_player.effect_skip_turn_update(response['data']['value'])
+        print(result)
+        effect = app_player.get_effect()
+        print(effect)
+        return effect
     except:
         return {"Error": "Invalid parameters", "Status": 400}
 
