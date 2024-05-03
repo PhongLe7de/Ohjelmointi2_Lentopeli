@@ -243,6 +243,9 @@ const handleDiceRolling = async (player) => {
       const getmainland = mainlandStampsP1.getElementsByClassName(`${item}-stamp`)
       if (getmainland) {
         getmainland[0].src = `assets/leimat/${item}_saavutettu.png`
+        if (getmainland[6]){
+          alert("WINNER")
+        }
       } else {
         console.log('mainland not found');
       }
