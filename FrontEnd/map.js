@@ -25,6 +25,20 @@ class Player {
   }
 }
 
+var player1Name;
+var player2Name;
+var player1Marker = L.marker([78.246101379395, 15.465600013733], {icon: L.icon({iconUrl: "red_plane_left.png", iconSize: [20,20]})}).addTo(map);
+var player2Marker = L.marker([78.246101379395, 15.465600013733], {icon: L.icon({iconUrl: "blue_plane_left.png", iconSize: [20,20]})}).addTo(map);
+
+function movePlayerMarker(player, place){
+    if(player == player1Name) {
+        player1Marker.setLatLng([place.latitude_deg, place.longitude_deg]);
+    }
+    else if(player == player2Name){
+        player2Marker.setLatLng([place.latitude_deg, place.longitude_deg]);
+    }
+}
+
 let gameRoute;
 
 form7.addEventListener("submit",()=>{handlePlayerInput() });

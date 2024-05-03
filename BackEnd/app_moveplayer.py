@@ -21,7 +21,7 @@ def player_location(player_name):
     result = cursor.fetchone()
     return result #Tämän tulos {'location':'ICAO'}
 def player_mainland(ICAO):
-    sql = f"SELECT continent from airport WHERE ident='{ICAO}'"
+    sql = f"SELECT continent, latitude_deg, longitude_deg from airport WHERE ident='{ICAO}'"
     cursor = database.connection.cursor(dictionary=True)
     cursor.execute(sql)
     result = cursor.fetchone()

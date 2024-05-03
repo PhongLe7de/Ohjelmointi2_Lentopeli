@@ -49,8 +49,11 @@ const handleDiceRolling = async (player) => {
         currentPlayer: listPlayer[currentPlayer],
         value: randomDiceValue
       }
-      const response = await handlePostData(data)
-      console.log(response)
+      const response = await handlePostData(data);
+      console.log(response);
+
+      movePlayerMarker(response.Player, response.space);
+
       const playerData = {
         score: response['update_score']['score'],
         effect: response['get_effect']['effect_skip_turns'],

@@ -22,6 +22,8 @@ const inputPlayerData = async (URL, data) => {
             const result = await response.json()
             const gameId = result.gameid
             console.log(result);
+            player1Name = result.player1;
+            player2Name = result.player2;
             return result
         } else {
             console.log('Fetch API FAIL')
