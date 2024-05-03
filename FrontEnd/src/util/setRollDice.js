@@ -81,6 +81,8 @@ const handleDiceRolling = async (player) => {
       }
       console.log(playerData);
 
+
+
       const playerMainland = playerData.mainland
       if (currentPlayer === 0) {
         player01Data.score = playerData.score
@@ -300,6 +302,13 @@ const handleDiceRolling = async (player) => {
 
     console.log('1 after', player01Data.effect);
     console.log('2 after', player02Data.effect);
+
+    if(player01Data.mainland.length === 3){
+      whoWins1();
+    }
+    else if(player02Data.mainland.length === 3){
+      whoWins2();
+    }
 
 
     currentPlayer = currentPlayer === 0 ? 1 : 0
