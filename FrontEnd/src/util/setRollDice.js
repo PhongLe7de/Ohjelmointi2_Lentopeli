@@ -31,6 +31,7 @@ const handleDiceRolling = async (player) => {
     playerSkipTurns = currentPlayer === 0 ? player01Data.effect : player02Data.effect;
     console.log(listPlayer[currentPlayer]);
     console.log('start', playerSkipTurns);
+    console.log(listPlayer[1])
     if (playerSkipTurns > 0) {
       if (currentPlayer === 0) {
         data = {
@@ -43,7 +44,7 @@ const handleDiceRolling = async (player) => {
       } else {
         data = {
           currentPlayer: listPlayer[1],
-          value: 0,
+          value: -1,
         };
         skipTurns = await handleSkipTurns(data);
         console.log(skipTurns);
@@ -168,6 +169,7 @@ const handleDiceRolling = async (player) => {
         }
 
       } else {
+        player02Data.score = playerData.score
         console.log(playerData.surprise_effect)
         switch (playerData.surprise_effect) {
           case 1:
