@@ -16,7 +16,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def change_location():
     print('ok')
     response = request.json
-    print(response )
+    print(response)
     player_name = response['data']['currentPlayer']
     dice = response['data']['value']
     try:
@@ -29,10 +29,14 @@ def change_location():
         spaceKey = spaceKeys[0]
         
         co = co_card()
+        co_effect = co['effect']
+        # updateEffect = app_player.effect_skip_turn_update(co['effect'])
+        # getEffect = app_player.get_effect()
 
         random_card = random.randint(0,1)
-        if random_card == 1 :
+        if random_card == 1:
             surprise = surprise_card()
+            # surpriseEffect = surprise['effect']
         else:
             surprise = {
                 "ID": 0,
@@ -42,30 +46,31 @@ def change_location():
                 "score": 0
             }
 
-        effects = co['effect'] + surprise['effect']
         scores = co['score'] + surprise['score']
         updateScore = app_player.update_score(scores)
 
-        updateEffect = app_player.effect_skip_turn_update(effects)
-        getEffect = app_player.get_effect()
+        # getEffect2 = app_player.get_effect()
         
 
 
         space = player_mainland(ident[spaceKey])
 
         result = {
+            # effects = co['effect'] + surprise['effect']
             'Player':player_name,
             'initial_score': get_score,
             'ident': ident,
             'update_score': updateScore,
-            'co_card':co,
+            'co_card': co,
+            'co_effect': co_effect,
             'surprise_card': surprise,
-            'final_effect_value': effects,
-            'get_effect': getEffect,
-            'updata_effect': updateEffect,
-            'space': space
-        }
+            'surprise_effect': surprise['effect'],
+            # 'updata_effect': updateEffect,
+            'space': space,
+            'ICAO': ident[spaceKey],
 
+        }
+        print(result)
         return result
     except:
         return {"Error": "Invalid parameters", "Status": 400}
