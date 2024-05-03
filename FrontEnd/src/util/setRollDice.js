@@ -43,7 +43,7 @@ const handleDiceRolling = async (player) => {
       } else {
         data = {
           currentPlayer: listPlayer[1],
-          value: 0,
+          value: -1,
         };
         skipTurns = await handleSkipTurns(data);
         console.log(skipTurns);
@@ -63,9 +63,6 @@ const handleDiceRolling = async (player) => {
         value: randomDiceValue
       }
       const response = await handlePostData(data)
-      console.log(response)
-      console.log(response.Player)
-      console.log(response.space)
 
       movePlayerMarker(response.Player, response.space);
       const playerData = {
@@ -78,7 +75,6 @@ const handleDiceRolling = async (player) => {
         co2: response['co_card'],
         surprise: response['surprise_card']
       }
-      console.log(playerData);
 
       const playerMainland = playerData.mainland
       if (currentPlayer === 0) {
@@ -168,6 +164,7 @@ const handleDiceRolling = async (player) => {
         }
 
       } else {
+        player02Data.score = playerData.score
         console.log(playerData.surprise_effect)
         switch (playerData.surprise_effect) {
           case 1:
