@@ -276,6 +276,12 @@ footer {
     background-color: orange;
 }
 
+.roll-feature {
+    position: absolute;
+    right: 36px;
+    top: 100px;
+}
+
 @keyframes modalRollingDiceOpen {
     from{
         transform: scale(0.5) translate(-100%, -100%);
