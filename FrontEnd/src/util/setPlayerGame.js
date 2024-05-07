@@ -52,7 +52,6 @@ const getGameBoard = async (URL, id) => {
         console.error(error);
     }
 }
-const exampleddss= ()=>{console.log('sdsdsdsa');}
 
 
 

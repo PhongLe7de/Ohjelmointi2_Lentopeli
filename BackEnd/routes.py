@@ -3,7 +3,7 @@ from flask import Flask, Response, request
 from flask_cors import CORS, cross_origin
 from app_card import co_card, surprise_card
 from app_moveplayer import Player, player_mainland, player_space
-from app_gameboard_Phong import check_player, register_player, initialize, game_board
+from app_gameboard_Phong import check_player, register_player, initialize, game_board, game_score
 import json
 import random
 
@@ -28,13 +28,10 @@ def change_location():
         
         co = co_card()
         co_effect = co['effect']
-        # updateEffect = app_player.effect_skip_turn_update(co['effect'])
-        # getEffect = app_player.get_effect()
 
         random_card = random.randint(0,1)
         if random_card == 1:
             surprise = surprise_card()
-            # surpriseEffect = surprise['effect']
         else:
             surprise = {
                 "ID": 0,
@@ -47,14 +44,9 @@ def change_location():
         scores = co['score'] + surprise['score']
         updateScore = app_player.update_score(scores)
 
-        # getEffect2 = app_player.get_effect()
-        
-
-
         space = player_mainland(ident[spaceKey])
 
         result = {
-            # effects = co['effect'] + surprise['effect']
             'Player':player_name,
             'initial_score': get_score,
             'ident': ident,
@@ -63,7 +55,6 @@ def change_location():
             'co_effect': co_effect,
             'surprise_card': surprise,
             'surprise_effect': surprise['effect'],
-            # 'updata_effect': updateEffect,
             'space': space,
             'ICAO': ident[spaceKey],
 
@@ -194,6 +185,16 @@ def player_surprise_card():
     try:
         surprise = surprise_card()
         jsonresult = json.dumps(surprise)
+        return Response(response=jsonresult, mimetype="application/json")
+    except:
+        return {"Error": "Invalid parameters", "Status": 400}
+
+@app.route('/gamescores/', methods=['GET'])
+@cross_origin(origin='*')
+def games():
+    try:
+        result = game_score()
+        jsonresult = json.dumps(result)
         return Response(response=jsonresult, mimetype="application/json")
     except:
         return {"Error": "Invalid parameters", "Status": 400}
