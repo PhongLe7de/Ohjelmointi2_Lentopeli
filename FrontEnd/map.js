@@ -133,7 +133,7 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 async function drawTheRoute(gameboardArray) {
-    //console.log(gameRoute);
+    // console.log(gameRoute);
     let cordinates = [];
     for (i of gameboardArray) {
     cordinates.push([i.latitude_deg, i.longitude_deg]);

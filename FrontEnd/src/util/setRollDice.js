@@ -74,14 +74,11 @@ const handleDiceRolling = async (player) => {
         score: response['update_score']['score'],
         co_effect: response['co_effect'],
         surprise_effect: response['surprise_effect'],
-        // effect: response['final_effect_value']['effect_skip_turns'],
         mainland: response['space']['continent'],
         co2: response['co_card'],
         surprise: response['surprise_card']
       }
       console.log(playerData);
-
-
 
       const playerMainland = playerData.mainland
       if (currentPlayer === 0) {
@@ -95,7 +92,6 @@ const handleDiceRolling = async (player) => {
             skipTurns = await handleSkipTurns(data)
             console.log(skipTurns)
             player02Data.effect = skipTurns['effect_skip_turns']
-            // player02Data.effect++;
             break;
           case 2:
             data = {
@@ -123,7 +119,6 @@ const handleDiceRolling = async (player) => {
             console.log(forward)
             break;
           default:
-            // Handle other cases if needed
             break;
         }
         switch (playerData.co_effect) {
@@ -162,7 +157,6 @@ const handleDiceRolling = async (player) => {
             console.log(forward)
             break;
           default:
-            // Handle other cases if needed
             break;
         }
         const checkFunction = player01Data.mainland.includes(playerMainland)
@@ -200,7 +194,6 @@ const handleDiceRolling = async (player) => {
             }
             const back = await handlePostData(data)
             console.log(back)
-              //KORJAA TÄMÄ SAATANA
             break;
           case 4:
             data = {
@@ -211,7 +204,6 @@ const handleDiceRolling = async (player) => {
             console.log(forward)
             break;
           default:
-            // Handle other cases if needed
             break;
         }
       switch (playerData.co_effect) {
@@ -250,7 +242,6 @@ const handleDiceRolling = async (player) => {
           console.log(forward)
           break;
         default:
-          // Handle other cases if needed
           break;
       }
         const checkFunction = player02Data.mainland.includes(playerMainland)
@@ -258,7 +249,6 @@ const handleDiceRolling = async (player) => {
       }
 
     }
-    //Stamp
     const mainlandStampsP1 = document.getElementById('passport-1')
     const mainlandStampsP2 = document.getElementById('passport-2')
 

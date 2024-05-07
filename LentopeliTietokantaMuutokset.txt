@@ -1,21 +1,14 @@
+#Turhien taulujen poisto:
+DROP table goal_reached;
+DROP table goal;
+
+
+#Luo uuden taulun, jossa yllätys- ja co-kortit
 #effect=1 -> Anna toiselle vuoron menetys SABOTAASI
 #effect=2 -> Pelaaja menettää vuoron HUONOA TUURIA
 #effect=3 -> Pelaaja siirtyy kolme askelta taaksepäin HUONOA TUURIA
 #effect=4 -> Siirryt kolme askelta eteenpäin ONNENPEKKA
 
-
-#Luo uuden pöydän, missä pelaaja-nimi, pisteet ja vuoron skippaukset
-CREATE TABLE game_player (
-    ID int NOT NULL AUTO_INCREMENT,
-    player_name varchar(255),
-    score int DEFAULT 0,
-    effect_skip_turns int DEFAULT 0,
-    victory bool DEFAULT 0,
-    PRIMARY KEY (ID),
-    UNIQUE (player_name)
-);
-
-#Luo uuden pöydän, jossa yllätys- ja co-kortit
 CREATE TABLE cards (
     ID int NOT NULL AUTO_INCREMENT,
     type varchar(255),
@@ -26,13 +19,8 @@ CREATE TABLE cards (
     UNIQUE (flavour_text)
 );
 
-#Turhien pöytien poisto:
-DROP table goal_reached;
-DROP table goal;
-DROP table game_player; #TÄMÄ VASTA VIKAKSI
 
-
-#Pelikenttätaulu, periaatteessa pitäisi ehkä olla FK airport tauluun, jotta varmasti olemassa oleva ident tulee arvoksi
+#Luo uuden taulun, jossa pelikenttä
 CREATE TABLE gameboard (
     ID int NOT NULL AUTO_INCREMENT,
     space1 varchar(40),
@@ -82,15 +70,17 @@ CREATE TABLE gameboard (
     PRIMARY KEY (ID)
 );
 
-#Yhdistetään game_player olemassa olevaan game-tauluun (koska siinä valmiiksi location FK airport tauluun)
-
+#Muokataan game-taulua:
+#Otetaan turhat sarakkeet pois
 ALTER TABLE game DROP COLUMN co2_consumed;
 ALTER TABLE game DROP COLUMN co2_budget;
 ALTER TABLE game DROP COLUMN screen_name,
 ALTER TABLE game DROP COLUMN co2_left;
 
+#Muokataan id autoincrementiksi:
 ALTER TABLE game MODIFY COLUMN id INT AUTO_INCREMENT;
 
+#lisätään tarvittavat sarakkeet:
 ALTER TABLE game ADD (
     player_name varchar(255),
 	gameid int DEFAULT 0,
@@ -100,6 +90,7 @@ ALTER TABLE game ADD (
 );
 
 
+#Seuraavassa eri kortit, jotka syötetään cards tauluun
 #Sabotaasi-kortit
 INSERT INTO cards (type, flavour_text, effect, score)
 VALUES ('Sabotaasi', 'Avioehto kannatti: Hyviä uutisia! Asianajajasi oli sinuun yhteydessä ilmoittaakseen, 

@@ -1,13 +1,6 @@
-from flask import Flask, Response, request
+
 import airports
 import database
-
-from flask_cors import CORS, cross_origin
-
-
-app = Flask(__name__)
-cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
 
 def insert_to_database(airports):
     space_list = [f"space{i}" for i in range(1, 45)]
@@ -51,7 +44,6 @@ def airport_icao(icao):
     result = cursor.fetchone()
     return result
 
-print(airport_icao("ENSB"))
 def game_board(gameid):
     sql = f"SELECT * FROM gameboard WHERE id={gameid}"
     cursor = database.connection.cursor(dictionary=True)
@@ -80,59 +72,16 @@ def check_player(player_name):
 
 def register_player(player_name, gameid):
     sql_player_register = f"INSERT INTO game (gameid, player_name, location) VALUES ({gameid}, '{player_name}', 'ENSB');"
-    cursor = database.connection.cursor()
+    cursor = database.connection.cursor(dictionary=True)
     cursor.execute(sql_player_register)
     database.connection.commit()
 
-# @app.route('/start_game/' ,methods=['POST'])
-# # @cross_origin(origin='*')
-# def start():
-#     try:
-#         response = request.json
-#         print(response)
-#         player1_name=response['data']['player1_name']
-#         player2_name=response['data']['player2_name']
-#         print(player1_name)
-#         print(player2_name)
-
-#         player1_check = check_player(player1_name)
-#         player2_check = check_player(player2_name)
-
-#         print(player1_check, player2_check)
-#         if player1_check:
-#             if player2_check:
-#                 return {"status": "error", "message": "Molemmat pelaajanimet varattuja"}
-#             else:
-#                 return {"status": "error", "message": f"Pelaajanimi {player1_name} on varattu"}
-#         elif player2_check:
-#             if player1_check:
-#                 return {"status": "error", "message": "Molemmat pelaajanimet varattuja"}
-#             else:
-#                 return {"status": "error", "message": f"Pelaajanimi {player2_name} on varattu"}
-#         else:
-#             gameid = initialize()
-#             register_player(player1_name, gameid)
-#             register_player(player2_name, gameid)
-
-#             return {"gameid": f'{gameid}', "player1": f'{player1_name}', "player2": f'{player2_name}'}
-
-#     except:
-#         return {"Error": "Invalid parameters", "Status": 400}
-
-# @app.route('/gameboard/', methods=['POST'])
-# def get_gameboard():
-#     try:
-#         response = request.json
-#         print(response)
-#         id = response['id']
-#         result = game_board(id)
-#         print(result)
-#         return result
-#     except:
-#         return {"Error": "Invalid parameters", "Status": 400}
-
-if __name__ == "__main__":
-    app.run(use_reloader=True, host='127.0.0.1', port=3000)
+def game_score():
+    sql_game = f"SELECT * from game"
+    cursor = database.connection.cursor(dictionary=True)
+    cursor.execute(sql_game)
+    result = cursor.fetchall()
+    return result
 
 
 
