@@ -29,6 +29,22 @@ sekä nousevaa merenpintaa.</p>
         <p>Jokaisen lennon päätteeksi pelaajat nostavat Hiilidioksidi-kortteja, mitkä määrittävät heidän lennoistaan aiheutuneet Ökyrikas-pisteet.</p>
         <p>Lopussa kruunataan Rutikuiva, joka ehtii Etelänavalle ennen kuin nouseva merenpinta sulattaa sen. Lisäksi kruunataan myös Upporikas, joka ei ehtinyt ensimmäisenä maaliin, mutta keräsi eniten Ökyrikas-pisteitä ja aiheutti siis hiilidioksidipäästöillään suurimmat vauriot maapallon ilmakehälle.</p>
         <p>Mikäli ensimmäisenä maaliin saapunut pelaaja on myös kerännyt eniten Ökyrikas-pisteitä, on hän sekä Rutikuiva että Upporikas eli Ylivoimainen Mestari.</p>
+        <p>Peliä varten tarvitsen lentopeli-tietokannan Relaatiotietokanta-kurssilta.
+        <h1>Ohjeet</h1>
+        <p>Jotta peli toimii on luotava kaksi uutta taulua (cards ja gameboard).
+        Cards taulu sisältää pelin yllätyskortit. Tarvittavat tietokanta-muutokset löydät
+        seuraavasta tiedostosta: LentopeliTietokantaMuutokset.txt. </p>
+
+        <p>Syötä käyttäjätunnus ja salasana sekä tietokannan nimi tietokanta-ajurin connect-metodiin, joka löytyy:
+            Backend/database.py</p>
+
+        <p>Ennen kun aloitat pelin käynnistä Backend taustapalvelin Backend/routes.py
+            Pelin etusivulla (home.html) on kentät, joihin ensiksi syötetään pelaajien nimet. Kun pelikenttä on
+            muodostunut kartalle voit avata nopan OPEN-täpästä. Noppaa heitetään klikkaamalla ROLL. Pelaajat
+            heittävät noppaa vuorollansa.</p>
+
+        <p>Virhetilanteissa tarkasta konsoli, sieltä löytyy tarkentavat virheilmoitukset, joiden avulla saat
+            ratkottua tilanteen (ehkä).</p>
     </div>
 </div>
 <footer>

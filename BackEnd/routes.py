@@ -3,7 +3,7 @@ from flask import Flask, Response, request
 from flask_cors import CORS, cross_origin
 from app_card import co_card, surprise_card
 from app_moveplayer import Player, player_mainland, player_space
-from app_gameboard_Phong import check_player, register_player, initialize, game_board
+from app_gameboard_Phong import check_player, register_player, initialize, game_board, game_score
 import json
 import random
 
@@ -194,6 +194,16 @@ def player_surprise_card():
     try:
         surprise = surprise_card()
         jsonresult = json.dumps(surprise)
+        return Response(response=jsonresult, mimetype="application/json")
+    except:
+        return {"Error": "Invalid parameters", "Status": 400}
+
+@app.route('/gamescores/', methods=['GET'])
+@cross_origin(origin='*')
+def games():
+    try:
+        result = game_score()
+        jsonresult = json.dumps(result)
         return Response(response=jsonresult, mimetype="application/json")
     except:
         return {"Error": "Invalid parameters", "Status": 400}
